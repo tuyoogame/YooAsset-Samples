@@ -23,11 +23,3 @@ public class GameEncryption : IEncryptionServices
 		return temper;
 	}
 }
-
-public class GameRedundancy : IRedundancyServices
-{
-	public bool Check(string filePath)
-	{
-		throw new System.NotImplementedException();
-	}
-}
