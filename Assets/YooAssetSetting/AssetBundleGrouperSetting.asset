@@ -12,24 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185f6993d5150494d98da50e26cb1c25, type: 3}
   m_Name: AssetBundleGrouperSetting
   m_EditorClassIdentifier: 
-  AutoCollectShaders: 1
-  ShadersBundleName: myshaders
+  AutoCollectShaders: 0
+  ShadersBundleName: 
   Groupers:
   - GrouperName: Level
     GrouperDesc: "\u5173\u5361\u8D44\u6E90"
     AssetTags: level
     Collectors:
-    - CollectPath: Assets/GameRes/Entity/Level1
+    - CollectPath: Assets/GameRes/Entity/Level1/footman_Blue.prefab
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
       AssetTags: level1
-    - CollectPath: Assets/GameRes/Entity/Level2
+    - CollectPath: Assets/GameRes/Entity/Level2/footman_Green.prefab
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
       AssetTags: level2
-    - CollectPath: Assets/GameRes/Entity/Level3
+    - CollectPath: Assets/GameRes/Entity/Level3/footman_Red.prefab
+      PackRuleName: PackSeparately
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: level3
+    - CollectPath: Assets/GameRes/Entity/Level3/footman_Yellow.prefab
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
