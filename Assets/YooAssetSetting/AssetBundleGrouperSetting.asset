@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 185f6993d5150494d98da50e26cb1c25, type: 3}
+  m_Name: AssetBundleGrouperSetting
+  m_EditorClassIdentifier: 
+  AutoCollectShaders: 1
+  ShadersBundleName: myshaders
+  Groupers:
+  - GrouperName: Level
+    GrouperDesc: "\u5173\u5361\u8D44\u6E90"
+    AssetTags: level
+    Collectors:
+    - CollectPath: Assets/GameRes/Entity/Level1
+      PackRuleName: PackSeparately
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: level1
+    - CollectPath: Assets/GameRes/Entity/Level2
+      PackRuleName: PackSeparately
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: level2
+    - CollectPath: Assets/GameRes/Entity/Level3
+      PackRuleName: PackSeparately
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: level3
+  - GrouperName: Buildin
+    GrouperDesc: "\u5185\u7F6E\u8D44\u6E90"
+    AssetTags: buildin
+    Collectors:
+    - CollectPath: Assets/GameRes/Scene
+      PackRuleName: PackSeparately
+      FilterRuleName: CollectScene
+      NotWriteToAssetList: 0
+      AssetTags: 
+  - GrouperName: Other
+    GrouperDesc: "\u5176\u5B83\u8D44\u6E90"
+    AssetTags: other
+    Collectors:
+    - CollectPath: Assets/GameRes/Music
+      PackRuleName: PackCollector
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: 
+    - CollectPath: Assets/GameRes/Texture
+      PackRuleName: PackCollector
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: 
+    - CollectPath: Assets/GameRes/UIAtlas
+      PackRuleName: PackSeparately
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: 
+    - CollectPath: Assets/GameRes/Config
+      PackRuleName: PackRawFile
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: 
+  - GrouperName: Art
+    GrouperDesc: "\u7F8E\u672F\u8D44\u6E90"
+    AssetTags: 
+    Collectors:
+    - CollectPath: Assets/GameArt/UISprite/UIIcons
+      PackRuleName: PackDirectory
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 1
+      AssetTags: 
