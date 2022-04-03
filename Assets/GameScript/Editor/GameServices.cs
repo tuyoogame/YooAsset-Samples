@@ -6,10 +6,10 @@ public class GameEncryption : IEncryptionServices
 	/// <summary>
 	/// 检测资源包是否需要加密
 	/// </summary>
-	bool IEncryptionServices.Check(string filePath)
+	bool IEncryptionServices.Check(string bundleName)
 	{
-		// 对配置表相关的资源包进行加密
-		return filePath.Contains("Assets/Config/");
+		// 对配置表进行加密
+		return bundleName.Contains("assets/gameres/config/");
 	}
 
 	/// <summary>
