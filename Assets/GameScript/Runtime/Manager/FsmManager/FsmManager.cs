@@ -85,7 +85,7 @@ public static class FsmManager
 			return;
 		}
 
-		UnityEngine.Debug.Log($"FSM transition {_curNode.Name} to {node.Name}");
+		UnityEngine.Debug.Log($"FSM change {_curNode.Name} to {node.Name}");
 		_preNode = _curNode;
 		_curNode.OnExit();
 		_curNode = node;

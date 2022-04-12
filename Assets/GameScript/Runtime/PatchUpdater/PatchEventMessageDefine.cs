@@ -30,6 +30,13 @@ public class PatchEventMessageDefine
 	}
 
 	/// <summary>
+	/// 资源版本号更新失败
+	/// </summary>
+	public class StaticVersionUpdateFailed : IEventMessage
+	{
+	}
+
+	/// <summary>
 	/// 补丁清单更新失败
 	/// </summary>
 	public class PatchManifestUpdateFailed : IEventMessage

@@ -112,10 +112,12 @@ public class PatchWindow : MonoBehaviour
 		if (msg is PatchEventMessageDefine.PatchStatesChange)
 		{
 			var message = msg as PatchEventMessageDefine.PatchStatesChange;
-			if (message.CurrentStates == EPatchStates.UpdateManifest)
-				_tips.text = "Check update patch manifest.";
+			if (message.CurrentStates == EPatchStates.UpdateStaticVersion)
+				_tips.text = "Update static version.";
+			else if (message.CurrentStates == EPatchStates.UpdateManifest)
+				_tips.text = "Update patch manifest.";
 			else if (message.CurrentStates == EPatchStates.CreateDownloader)
-				_tips.text = "Check update download contents.";
+				_tips.text = "Check download contents.";
 			else if (message.CurrentStates == EPatchStates.DownloadWebFiles)
 				_tips.text = "Downloading patch files.";
 			else if (message.CurrentStates == EPatchStates.PatchDone)
@@ -142,6 +144,14 @@ public class PatchWindow : MonoBehaviour
 			string currentSizeMB = (message.CurrentDownloadSizeBytes / 1048576f).ToString("f1");
 			string totalSizeMB = (message.TotalDownloadSizeBytes / 1048576f).ToString("f1");
 			_tips.text = $"{message.CurrentDownloadCount}/{message.TotalDownloadCount} {currentSizeMB}MB/{totalSizeMB}MB";
+		}
+		else if (msg is PatchEventMessageDefine.StaticVersionUpdateFailed)
+		{
+			System.Action callback = () =>
+			{
+				PatchUpdater.HandleOperation(EPatchOperation.TryUpdateStaticVersion);
+			};
+			ShowMessageBox($"Failed to update static version, please check the network status.", callback);
 		}
 		else if (msg is PatchEventMessageDefine.PatchManifestUpdateFailed)
 		{

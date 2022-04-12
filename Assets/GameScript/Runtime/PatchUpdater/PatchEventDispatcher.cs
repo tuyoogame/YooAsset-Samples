@@ -23,6 +23,11 @@ public static class PatchEventDispatcher
 		msg.CurrentDownloadSizeBytes = currentDownloadSizeBytes;
 		EventManager.SendMessage(msg);
 	}
+	public static void SendStaticVersionUpdateFailedMsg()
+	{
+		PatchEventMessageDefine.StaticVersionUpdateFailed msg = new PatchEventMessageDefine.StaticVersionUpdateFailed();
+		EventManager.SendMessage(msg);
+	}
 	public static void SendPatchManifestUpdateFailedMsg()
 	{
 		PatchEventMessageDefine.PatchManifestUpdateFailed msg = new PatchEventMessageDefine.PatchManifestUpdateFailed();

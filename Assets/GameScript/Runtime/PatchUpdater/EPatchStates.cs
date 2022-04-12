@@ -5,6 +5,11 @@
 public enum EPatchStates
 {
 	/// <summary>
+	/// 更新静态的资源版本
+	/// </summary>
+	UpdateStaticVersion,
+
+	/// <summary>
 	/// 更新补丁清单
 	/// </summary>
 	UpdateManifest,

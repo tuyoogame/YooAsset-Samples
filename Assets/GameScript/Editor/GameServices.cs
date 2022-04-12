@@ -1,6 +1,18 @@
 using System;
 using YooAsset.Editor;
 
+public class EncryptionNone : IEncryptionServices
+{
+	bool IEncryptionServices.Check(string bundleName)
+	{
+		return false;
+	}
+	byte[] IEncryptionServices.Encrypt(byte[] fileData)
+	{
+		throw new System.NotImplementedException();
+	}
+}
+
 public class GameEncryption : IEncryptionServices
 {
 	/// <summary>

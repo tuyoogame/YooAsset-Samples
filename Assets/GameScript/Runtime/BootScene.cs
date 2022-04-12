@@ -49,7 +49,6 @@ public class BootScene : MonoBehaviour
 		createParameters.LocationRoot = "Assets/GameRes";
 		createParameters.DecryptionServices = null;
 		createParameters.ClearCacheWhenDirty = false;
-		createParameters.IgnoreResourceVersion = true;
 		createParameters.DefaultHostServer = GetHostServerURL();
 		createParameters.FallbackHostServer = GetHostServerURL();
 		yield return YooAssets.InitializeAsync(createParameters);

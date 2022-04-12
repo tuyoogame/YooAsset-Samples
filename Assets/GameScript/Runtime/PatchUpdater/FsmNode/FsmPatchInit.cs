@@ -25,6 +25,6 @@ internal class FsmPatchInit : IFsmNode
 	{
 		yield return new WaitForSecondsRealtime(0.5f);
 
-		FsmManager.Transition(nameof(FsmUpdateManifest));
+		FsmManager.Transition(nameof(FsmUpdateStaticVersion));
 	}
 }
