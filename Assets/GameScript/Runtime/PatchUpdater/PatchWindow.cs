@@ -89,7 +89,7 @@ public class PatchWindow : MonoBehaviour
 	{
 		_slider = transform.Find("UIWindow/Slider").GetComponent<Slider>();
 		_tips = transform.Find("UIWindow/Slider/txt_tips").GetComponent<Text>();
-		_tips.text = "正在准备游戏世界......";
+		_tips.text = "Initializing the game world !";
 		_messageBoxObj = transform.Find("UIWindow/MessgeBox").gameObject;
 		_messageBoxObj.SetActive(false);
 
@@ -113,13 +113,13 @@ public class PatchWindow : MonoBehaviour
 		{
 			var message = msg as PatchEventMessageDefine.PatchStatesChange;
 			if (message.CurrentStates == EPatchStates.UpdateManifest)
-				_tips.text = "正在更新补丁清单";
+				_tips.text = "Check update patch manifest.";
 			else if (message.CurrentStates == EPatchStates.CreateDownloader)
-				_tips.text = "正在准备下载列表";
+				_tips.text = "Check update download contents.";
 			else if (message.CurrentStates == EPatchStates.DownloadWebFiles)
-				_tips.text = "正在下载更新文件";
+				_tips.text = "Downloading patch files.";
 			else if (message.CurrentStates == EPatchStates.PatchDone)
-				_tips.text = "欢迎来到游戏世界";
+				_tips.text = "Welcome to game world !";
 			else
 				throw new NotImplementedException(message.CurrentStates.ToString());
 		}
@@ -133,7 +133,7 @@ public class PatchWindow : MonoBehaviour
 			float sizeMB = message.TotalSizeBytes / 1048576f;
 			sizeMB = Mathf.Clamp(sizeMB, 0.1f, float.MaxValue);
 			string totalSizeMB = sizeMB.ToString("f1");
-			ShowMessageBox($"发现{message.TotalCount}个资源文件需要更新，总大小{totalSizeMB}MB", callback);
+			ShowMessageBox($"Found update patch files, Total count {message.TotalCount} Total szie {totalSizeMB}MB", callback);
 		}
 		else if (msg is PatchEventMessageDefine.DownloadProgressUpdate)
 		{
@@ -149,7 +149,7 @@ public class PatchWindow : MonoBehaviour
 			{
 				PatchUpdater.HandleOperation(EPatchOperation.TryUpdatePatchManifest);
 			};
-			ShowMessageBox($"更新资源清单失败，请检查网络状况", callback);
+			ShowMessageBox($"Failed to update patch manifest, please check the network status.", callback);
 		}
 		else if (msg is PatchEventMessageDefine.WebFileDownloadFailed)
 		{
@@ -158,7 +158,7 @@ public class PatchWindow : MonoBehaviour
 			{
 				PatchUpdater.HandleOperation(EPatchOperation.TryDownloadWebFiles);
 			};
-			ShowMessageBox($"文件下载失败 : {message.Name}", callback);
+			ShowMessageBox($"Failed to download file : {message.Name}", callback);
 		}
 		else
 		{

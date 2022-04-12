@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
@@ -10,75 +9,93 @@ public class GameScene : MonoBehaviour
 {
 	public GameObject CanvasRoot;
 
-	void Awake()
+	void Start()
 	{
-		// 同步加载
+		// 同步编程方式
 		SyncLoad();
 
-		// 协程加载
-		StartCoroutine(CoroutineLoad());
+		// 异步编程方式1
+		AsyncLoad1();
+
+		// 异步编程方式2
+		this.StartCoroutine(AsyncLoad2());
+
+		// 异步编程方式3
+		AsyncLoad3();
 	}
-	async void Start()
+	void OnGUI()
 	{
-		// 异步编程
-		await AsyncLoad();
+		GUIConsole.OnGUI();
 	}
 
 	/// <summary>
-	/// 同步加载方式
+	/// 同步编程方式
 	/// </summary>
 	void SyncLoad()
 	{
-		// 加载Unity官方生成的图集
-		{
-			var btn = CanvasRoot.transform.Find("unity_atlas/btn").GetComponent<Button>();
-			var icon = CanvasRoot.transform.Find("unity_atlas/icon").GetComponent<Image>();
-			btn.onClick.AddListener(() =>
-			{
-				AssetOperationHandle handle = YooAssets.LoadAssetSync<SpriteAtlas>("UIAtlas/unityAtlas");
-				SpriteAtlas atlas = handle.AssetObject as SpriteAtlas;
-				icon.sprite = atlas.GetSprite("Icon_Arrows_128");
-			});
-		}
-
-		// 加载TexturePacker生成的图集
-		{
-			var btn = CanvasRoot.transform.Find("tp_atlas/btn").GetComponent<Button>();
-			var icon = CanvasRoot.transform.Find("tp_atlas/icon").GetComponent<Image>();
-			btn.onClick.AddListener(() =>
-			{
-				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsSync<Sprite>("UIAtlas/tpAtlas");
-				icon.sprite = handle.GetSubAssetObject<Sprite>("Icon_Arrows_128");
-			});
-		}
-
 		// 加载预制体
 		{
 			var btn = CanvasRoot.transform.Find("entity/btn").GetComponent<Button>();
-			var icon = CanvasRoot.transform.Find("entity/icon").GetComponent<Image>();
 			btn.onClick.AddListener(() =>
 			{
-				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>("Entity/Level1/footman_Blue");
+				var icon = CanvasRoot.transform.Find("entity/icon").GetComponent<Image>();
+				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>("Entity/Level1/footman_Blue");		
 				GameObject go = handle.InstantiateSync(icon.transform);
 				go.transform.localPosition = new Vector3(0, -50, -100);
 				go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);
 				go.transform.localScale = Vector3.one * 50;
 			});
 		}
+	}
+
+	/// <summary>
+	/// 异步编程方式1
+	/// </summary>
+	void AsyncLoad1()
+	{
+		// 加载Unity官方生成的图集
+		{
+			var btn = CanvasRoot.transform.Find("unity_atlas/btn").GetComponent<Button>();
+			btn.onClick.AddListener(() =>
+			{
+				AssetOperationHandle handle = YooAssets.LoadAssetAsync<SpriteAtlas>("UIAtlas/unityAtlas");
+				handle.Completed += OnUnityAtlas_Completed;
+			});
+		}
+
+		// 加载TexturePacker生成的图集
+		{
+			var btn = CanvasRoot.transform.Find("tp_atlas/btn").GetComponent<Button>();
+			btn.onClick.AddListener(() =>
+			{
+				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/tpAtlas");
+				handle.Completed += OnTpAtlasAsset_Completed;
+			});
+		}
 
 		// 加载原生文件
 		{
 			var btn = CanvasRoot.transform.Find("config/btn").GetComponent<Button>();
-			
 			btn.onClick.AddListener(() =>
 			{
 				string savePath = $"{YooAssets.GetSandboxRoot()}/config1.txt";
 				RawFileOperation operation = YooAssets.LoadRawFileAsync("Config/config1.txt", savePath);
-				operation.Completed += Operation_Completed;
+				operation.Completed += OnRawFile_Completed;
 			});
 		}
 	}
-	private void Operation_Completed(AsyncOperationBase operation)
+	private void OnUnityAtlas_Completed(AssetOperationHandle handle)
+	{
+		var icon = CanvasRoot.transform.Find("unity_atlas/icon").GetComponent<Image>();
+		SpriteAtlas atlas = handle.AssetObject as SpriteAtlas;
+		icon.sprite = atlas.GetSprite("Icon_Arrows_128");
+	}
+	private void OnTpAtlasAsset_Completed(SubAssetsOperationHandle handle)
+	{
+		var icon = CanvasRoot.transform.Find("tp_atlas/icon").GetComponent<Image>();
+		icon.sprite = handle.GetSubAssetObject<Sprite>("Icon_Arrows_128");
+	}
+	private void OnRawFile_Completed(AsyncOperationBase operation)
 	{
 		var hint = CanvasRoot.transform.Find("config/icon/hint").GetComponent<Text>();
 		RawFileOperation op = operation as RawFileOperation;
@@ -86,9 +103,9 @@ public class GameScene : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 协程加载方式
+	/// 异步编程方式2
 	/// </summary>
-	IEnumerator CoroutineLoad()
+	IEnumerator AsyncLoad2()
 	{
 		// 加载背景音乐
 		{
@@ -101,9 +118,9 @@ public class GameScene : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 异步编程方式
+	/// 异步编程方式3
 	/// </summary>
-	async Task AsyncLoad()
+	async void AsyncLoad3()
 	{
 		// 加载背景图片
 		{

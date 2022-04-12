@@ -48,6 +48,11 @@ MonoBehaviour:
       FilterRuleName: CollectScene
       NotWriteToAssetList: 0
       AssetTags: 
+    - CollectPath: Assets/GameRes/UIFont
+      PackRuleName: PackDirectory
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: 
   - GrouperName: Other
     GrouperDesc: "\u5176\u5B83\u8D44\u6E90"
     AssetTags: other
