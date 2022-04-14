@@ -7,6 +7,8 @@ public class BootScene : MonoBehaviour
 {
 	public static BootScene Instance { private set; get; }
 
+	public YooAssets.EPlayMode PlayMode = YooAssets.EPlayMode.EditorPlayMode;
+
 	void Awake()
 	{
 		Instance = this;
@@ -30,28 +32,35 @@ public class BootScene : MonoBehaviour
 
 	IEnumerator Start()
 	{
+		Debug.Log($"资源系统运行模式：{PlayMode}");
+
 		// 编辑器模拟模式
-		/*
-		var createParameters = new YooAssets.EditorPlayModeParameters();
-		createParameters.LocationRoot = "Assets/GameRes";
-		yield return YooAssets.InitializeAsync(createParameters);
-		*/
+		if(PlayMode == YooAssets.EPlayMode.EditorPlayMode)
+		{
+			var createParameters = new YooAssets.EditorPlayModeParameters();
+			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");
+			yield return YooAssets.InitializeAsync(createParameters);
+		}
 
 		// 单机模式
-		/*
-		var createParameters = new YooAssets.OfflinePlayModeParameters();
-		createParameters.LocationRoot = "Assets/GameRes";
-		yield return YooAssets.InitializeAsync(createParameters);
-		*/
+		if (PlayMode == YooAssets.EPlayMode.OfflinePlayMode)
+		{
+			var createParameters = new YooAssets.OfflinePlayModeParameters();
+			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");
+			yield return YooAssets.InitializeAsync(createParameters);
+		}
 
 		// 联机模式
-		var createParameters = new YooAssets.HostPlayModeParameters();
-		createParameters.LocationRoot = "Assets/GameRes";
-		createParameters.DecryptionServices = null;
-		createParameters.ClearCacheWhenDirty = false;
-		createParameters.DefaultHostServer = GetHostServerURL();
-		createParameters.FallbackHostServer = GetHostServerURL();
-		yield return YooAssets.InitializeAsync(createParameters);
+		if (PlayMode == YooAssets.EPlayMode.HostPlayMode)
+		{
+			var createParameters = new YooAssets.HostPlayModeParameters();
+			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");
+			createParameters.DecryptionServices = null;
+			createParameters.ClearCacheWhenDirty = false;
+			createParameters.DefaultHostServer = GetHostServerURL();
+			createParameters.FallbackHostServer = GetHostServerURL();
+			yield return YooAssets.InitializeAsync(createParameters);
+		}
 
 		// 运行补丁流程
 		PatchUpdater.Run();
