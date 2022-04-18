@@ -11,6 +11,9 @@ public class GameScene : MonoBehaviour
 
 	void Start()
 	{
+		// 初始化窗口
+		InitWindow();
+
 		// 同步编程方式
 		SyncLoad();
 
@@ -26,6 +29,12 @@ public class GameScene : MonoBehaviour
 	void OnGUI()
 	{
 		GUIConsole.OnGUI();
+	}
+
+	void InitWindow()
+	{
+		var version = CanvasRoot.transform.Find("version/res_version").GetComponent<Text>();
+		version.text = $"Resource ver : {YooAssets.GetResourceVersion()}";
 	}
 
 	/// <summary>
