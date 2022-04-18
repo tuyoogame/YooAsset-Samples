@@ -8,6 +8,7 @@
   </Grouper>
   <Grouper GrouperName="Buildin" GrouperDesc="内置资源" AssetTags="buildin">
     <Collector CollectPath="Assets/GameRes/Scene" PackRule="PackSeparately" FilterRule="CollectScene" NotWriteToAssetList="False" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/UIFont" PackRule="PackDirectory" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
   </Grouper>
   <Grouper GrouperName="Other" GrouperDesc="其它资源" AssetTags="other">
     <Collector CollectPath="Assets/GameRes/Music" PackRule="PackCollector" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
