@@ -1,30 +1,44 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 using YooAsset;
 
-public class GameScene : MonoBehaviour
+public class Game1Scene : MonoBehaviour
 {
 	public GameObject CanvasRoot;
 
+	private readonly List<AssetOperationHandle> _cachedAssetOperationHandles = new List<AssetOperationHandle>(1000);
+	private readonly List<SubAssetsOperationHandle> _cachedSubAssetsOperationHandles = new List<SubAssetsOperationHandle>(1000);
+
 	void Start()
 	{
+		YooAssets.UnloadUnusedAssets();
+
 		// 初始化窗口
 		InitWindow();
 
-		// 同步编程方式
-		SyncLoad();
+		// 异步编程
+		this.StartCoroutine(AsyncLoad1());
 
-		// 异步编程方式1
-		AsyncLoad1();
+		// 异步编程
+		AsyncLoad2();
+	}
+	void OnDestroy()
+	{
+		foreach(var handle in _cachedAssetOperationHandles)
+		{
+			handle.Release();
+		}
+		_cachedAssetOperationHandles.Clear();
 
-		// 异步编程方式2
-		this.StartCoroutine(AsyncLoad2());
-
-		// 异步编程方式3
-		AsyncLoad3();
+		foreach (var handle in _cachedSubAssetsOperationHandles)
+		{
+			handle.Release();
+		}	
+		_cachedSubAssetsOperationHandles.Clear();
 	}
 	void OnGUI()
 	{
@@ -35,54 +49,45 @@ public class GameScene : MonoBehaviour
 	{
 		var version = CanvasRoot.transform.Find("version/res_version").GetComponent<Text>();
 		version.text = $"Resource ver : {YooAssets.GetResourceVersion()}";
-	}
 
-	/// <summary>
-	/// 同步编程方式
-	/// </summary>
-	void SyncLoad()
-	{
-		// 加载预制体
+		// 同步加载预制体
 		{
 			var btn = CanvasRoot.transform.Find("entity/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
 				var icon = CanvasRoot.transform.Find("entity/icon").GetComponent<Image>();
-				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>("Entity/Level1/footman_Blue");		
+				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>("Entity/Level1/footman_Blue");
+				_cachedAssetOperationHandles.Add(handle);
 				GameObject go = handle.InstantiateSync(icon.transform);
 				go.transform.localPosition = new Vector3(0, -50, -100);
 				go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);
 				go.transform.localScale = Vector3.one * 50;
 			});
 		}
-	}
 
-	/// <summary>
-	/// 异步编程方式1
-	/// </summary>
-	void AsyncLoad1()
-	{
-		// 加载Unity官方生成的图集
+		// 异步加载Unity官方生成的图集
 		{
 			var btn = CanvasRoot.transform.Find("unity_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
 				AssetOperationHandle handle = YooAssets.LoadAssetAsync<SpriteAtlas>("UIAtlas/unityAtlas");
+				_cachedAssetOperationHandles.Add(handle);
 				handle.Completed += OnUnityAtlas_Completed;
 			});
 		}
 
-		// 加载TexturePacker生成的图集
+		// 异步加载TexturePacker生成的图集
 		{
 			var btn = CanvasRoot.transform.Find("tp_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
 				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/tpAtlas");
+				_cachedSubAssetsOperationHandles.Add(handle);
 				handle.Completed += OnTpAtlasAsset_Completed;
 			});
 		}
 
-		// 加载原生文件
+		// 异步加载原生文件
 		{
 			var btn = CanvasRoot.transform.Find("config/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
@@ -92,7 +97,17 @@ public class GameScene : MonoBehaviour
 				operation.Completed += OnRawFile_Completed;
 			});
 		}
+
+		// 异步加载主场景
+		{
+			var btn = CanvasRoot.transform.Find("sceneBtn").GetComponent<Button>();
+			btn.onClick.AddListener(() =>
+			{
+				YooAssets.LoadSceneAsync("Scene/Game2");
+			});
+		}
 	}
+
 	private void OnUnityAtlas_Completed(AssetOperationHandle handle)
 	{
 		var icon = CanvasRoot.transform.Find("unity_atlas/icon").GetComponent<Image>();
@@ -112,14 +127,15 @@ public class GameScene : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 异步编程方式2
+	/// 异步编程方式1
 	/// </summary>
-	IEnumerator AsyncLoad2()
+	IEnumerator AsyncLoad1()
 	{
 		// 加载背景音乐
 		{
 			var audioSource = CanvasRoot.transform.Find("music").GetComponent<AudioSource>();
 			AssetOperationHandle handle = YooAssets.LoadAssetAsync<AudioClip>("Music/town.mp3");
+			_cachedAssetOperationHandles.Add(handle);
 			yield return handle;
 			audioSource.clip = handle.AssetObject as AudioClip;
 			audioSource.Play();
@@ -127,14 +143,15 @@ public class GameScene : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 异步编程方式3
+	/// 异步编程方式2
 	/// </summary>
-	async void AsyncLoad3()
+	async void AsyncLoad2()
 	{
 		// 加载背景图片
 		{
 			var rawImage = CanvasRoot.transform.Find("texture").GetComponent<RawImage>();
 			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Texture>("Texture/bg2.jpeg");
+			_cachedAssetOperationHandles.Add(handle);
 			await handle.Task;
 			rawImage.texture = handle.AssetObject as Texture;
 		}
