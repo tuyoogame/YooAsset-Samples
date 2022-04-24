@@ -60,14 +60,14 @@ namespace YooAsset.Editor
 			// 拷贝核心文件
 			{
 				string sourcePath = $"{outputDirectory}/{manifestFileName}.bytes";
-				string destPath = $"{Application.dataPath}/StreamingAssets/{manifestFileName}.bytes";
+				string destPath = $"{AssetBundleBuilderHelper.GetStreamingAssetsFolderPath()}/{manifestFileName}.bytes";
 				EditorTools.CopyFile(sourcePath, destPath, true);
 			}
 
 			// 拷贝核心文件
 			{
 				string sourcePath = $"{outputDirectory}/{manifestFileName}.hash";
-				string destPath = $"{Application.dataPath}/StreamingAssets/{manifestFileName}.hash";
+				string destPath = $"{AssetBundleBuilderHelper.GetStreamingAssetsFolderPath()}/{manifestFileName}.hash";
 				EditorTools.CopyFile(sourcePath, destPath, true);
 			}
 
@@ -80,7 +80,7 @@ namespace YooAsset.Editor
 
 				fileCount++;
 				string sourcePath = $"{outputDirectory}/{patchBundle.Hash}";
-				string destPath = $"{Application.dataPath}/StreamingAssets/{patchBundle.Hash}";
+				string destPath = $"{AssetBundleBuilderHelper.GetStreamingAssetsFolderPath()}/{patchBundle.Hash}";
 				EditorTools.CopyFile(sourcePath, destPath, true);
 			}
 
