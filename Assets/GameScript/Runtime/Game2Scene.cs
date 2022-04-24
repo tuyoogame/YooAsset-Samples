@@ -10,6 +10,7 @@ public class Game2Scene : MonoBehaviour
 {
 	public GameObject CanvasRoot;
 	private readonly List<AssetOperationHandle> _cachedAssetOperationHandles = new List<AssetOperationHandle>(1000);
+	private SceneOperationHandle _subSceneHandle = null;
 
 	void Start()
 	{
@@ -35,6 +36,22 @@ public class Game2Scene : MonoBehaviour
 
 	void InitWindow()
 	{
+		// 同步加载预制体
+		{
+			var btn = CanvasRoot.transform.Find("entity/btn").GetComponent<Button>();
+			btn.onClick.AddListener(() =>
+			{
+				//var icon = CanvasRoot.transform.Find("entity/icon").GetComponent<Image>();
+				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>("Entity/Level1/footman_Blue");
+				_cachedAssetOperationHandles.Add(handle);
+				//GameObject go = handle.InstantiateSync(icon.transform);
+				GameObject go = handle.InstantiateSync();
+				go.transform.localPosition = new Vector3(0, -50, -100);
+				go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);
+				go.transform.localScale = Vector3.one * 50;
+			});
+		}
+
 		// 异步加载主场景
 		{
 			var btn = CanvasRoot.transform.Find("sceneBtn").GetComponent<Button>();
@@ -46,10 +63,23 @@ public class Game2Scene : MonoBehaviour
 
 		// 异步加载子场景
 		{
-			var btn = CanvasRoot.transform.Find("subSceneBtn").GetComponent<Button>();
+			var btn = CanvasRoot.transform.Find("subSceneLoadBtn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				YooAssets.LoadSceneAsync("Scene/SubScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+				_subSceneHandle = YooAssets.LoadSceneAsync("Scene/SubScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+			});
+		}
+
+		// 异步卸载子场景
+		{
+			var btn = CanvasRoot.transform.Find("subSceneUnloadBtn").GetComponent<Button>();
+			btn.onClick.AddListener(() =>
+			{
+				if(_subSceneHandle != null)
+				{
+					_subSceneHandle.UnloadAsync();
+					_subSceneHandle = null;
+				}				
 			});
 		}
 	}

@@ -1,8 +1,9 @@
 {
-    "name": "YooAsset.EditorExtend",
+    "name": "YooAsset.EditorExtension",
     "rootNamespace": "",
     "references": [
-        "YooAsset"
+        "YooAsset",
+        "YooAsset.Editor"
     ],
     "includePlatforms": [
         "Editor"
