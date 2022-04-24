@@ -41,11 +41,10 @@ public class Game2Scene : MonoBehaviour
 			var btn = CanvasRoot.transform.Find("entity/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				//var icon = CanvasRoot.transform.Find("entity/icon").GetComponent<Image>();
+				var icon = CanvasRoot.transform.Find("entity/icon").GetComponent<Image>();
 				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>("Entity/Level1/footman_Blue");
 				_cachedAssetOperationHandles.Add(handle);
-				//GameObject go = handle.InstantiateSync(icon.transform);
-				GameObject go = handle.InstantiateSync();
+				GameObject go = handle.InstantiateSync(icon.transform);
 				go.transform.localPosition = new Vector3(0, -50, -100);
 				go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);
 				go.transform.localScale = Vector3.one * 50;
