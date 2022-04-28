@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185f6993d5150494d98da50e26cb1c25, type: 3}
   m_Name: AssetBundleGrouperSetting
   m_EditorClassIdentifier: 
+  EnableAddressable: 0
   AutoCollectShaders: 1
   ShadersBundleName: myshaders
   Groupers:
@@ -20,16 +21,19 @@ MonoBehaviour:
     AssetTags: level
     Collectors:
     - CollectPath: Assets/GameRes/Entity/Level1/footman_Blue.prefab
+      AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
       AssetTags: level1
     - CollectPath: Assets/GameRes/Entity/Level2/footman_Green.prefab
+      AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
       AssetTags: level2
     - CollectPath: Assets/GameRes/Entity/Level3
+      AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
@@ -39,11 +43,13 @@ MonoBehaviour:
     AssetTags: buildin
     Collectors:
     - CollectPath: Assets/GameRes/Scene
+      AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectScene
       NotWriteToAssetList: 0
       AssetTags: 
     - CollectPath: Assets/GameRes/UIFont
+      AddressRuleName: AddressByFileName
       PackRuleName: PackDirectory
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
@@ -53,21 +59,25 @@ MonoBehaviour:
     AssetTags: other
     Collectors:
     - CollectPath: Assets/GameRes/Music
+      AddressRuleName: AddressByFileName
       PackRuleName: PackCollector
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
       AssetTags: 
     - CollectPath: Assets/GameRes/Texture
+      AddressRuleName: AddressByFileName
       PackRuleName: PackCollector
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
       AssetTags: 
     - CollectPath: Assets/GameRes/UIAtlas
+      AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
       AssetTags: 
     - CollectPath: Assets/GameRes/Config
+      AddressRuleName: AddressByFileName
       PackRuleName: PackRawFile
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
@@ -77,11 +87,13 @@ MonoBehaviour:
     AssetTags: 
     Collectors:
     - CollectPath: Assets/GameArt/UISprite/UIIcons
+      AddressRuleName: AddressByFileName
       PackRuleName: PackDirectory
       FilterRuleName: CollectAll
       NotWriteToAssetList: 1
       AssetTags: 
     - CollectPath: Assets/GameArt/ShaderVariants
+      AddressRuleName: AddressByFileName
       PackRuleName: PackShaderVariants
       FilterRuleName: CollectAll
       NotWriteToAssetList: 1

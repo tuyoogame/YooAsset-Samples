@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <Grouper GrouperName="Level" GrouperDesc="关卡资源" AssetTags="level">
-    <Collector CollectPath="Assets/GameRes/Entity/Level1/footman_Blue.prefab" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="level1" />
-    <Collector CollectPath="Assets/GameRes/Entity/Level2/footman_Green.prefab" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="level2" />
-    <Collector CollectPath="Assets/GameRes/Entity/Level3" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="level3" />
+    <Collector CollectPath="Assets/GameRes/Entity/Level1/footman_Blue.prefab" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="level1" />
+    <Collector CollectPath="Assets/GameRes/Entity/Level2/footman_Green.prefab" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="level2" />
+    <Collector CollectPath="Assets/GameRes/Entity/Level3" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="level3" />
   </Grouper>
   <Grouper GrouperName="Buildin" GrouperDesc="内置资源" AssetTags="buildin">
-    <Collector CollectPath="Assets/GameRes/Scene" PackRule="PackSeparately" FilterRule="CollectScene" NotWriteToAssetList="False" AssetTags="" />
-    <Collector CollectPath="Assets/GameRes/UIFont" PackRule="PackDirectory" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/Scene" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectScene" NotWriteToAssetList="False" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/UIFont" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
   </Grouper>
   <Grouper GrouperName="Other" GrouperDesc="其它资源" AssetTags="other">
-    <Collector CollectPath="Assets/GameRes/Music" PackRule="PackCollector" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
-    <Collector CollectPath="Assets/GameRes/Texture" PackRule="PackCollector" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
-    <Collector CollectPath="Assets/GameRes/UIAtlas" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
-    <Collector CollectPath="Assets/GameRes/Config" PackRule="PackRawFile" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/Music" AddressRule="AddressByFileName" PackRule="PackCollector" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/Texture" AddressRule="AddressByFileName" PackRule="PackCollector" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/UIAtlas" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/Config" AddressRule="AddressByFileName" PackRule="PackRawFile" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
   </Grouper>
   <Grouper GrouperName="Art" GrouperDesc="美术资源" AssetTags="">
-    <Collector CollectPath="Assets/GameArt/UISprite/UIIcons" PackRule="PackDirectory" FilterRule="CollectAll" NotWriteToAssetList="True" AssetTags="" />
-    <Collector CollectPath="Assets/GameArt/ShaderVariants" PackRule="PackShaderVariants" FilterRule="CollectAll" NotWriteToAssetList="True" AssetTags="" />
+    <Collector CollectPath="Assets/GameArt/UISprite/UIIcons" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" NotWriteToAssetList="True" AssetTags="" />
+    <Collector CollectPath="Assets/GameArt/ShaderVariants" AddressRule="AddressByFileName" PackRule="PackShaderVariants" FilterRule="CollectAll" NotWriteToAssetList="True" AssetTags="" />
   </Grouper>
 </root>

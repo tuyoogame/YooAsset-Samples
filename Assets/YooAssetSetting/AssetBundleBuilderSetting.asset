@@ -17,4 +17,5 @@ MonoBehaviour:
   EncyptionClassName: EncryptionNone
   AppendExtension: 0
   ForceRebuild: 1
+  DryRunBuild: 0
   BuildTags: buildin;
