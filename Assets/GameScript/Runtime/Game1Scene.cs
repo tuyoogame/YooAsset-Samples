@@ -70,7 +70,7 @@ public class Game1Scene : MonoBehaviour
 			var btn = CanvasRoot.transform.Find("unity_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				AssetOperationHandle handle = YooAssets.LoadAssetAsync<SpriteAtlas>("UIAtlas/unityAtlas");
+				AssetOperationHandle handle = YooAssets.LoadAssetAsync<SpriteAtlas>("UIAtlas/UnityPacker/unityAtlas");
 				_cachedAssetOperationHandles.Add(handle);
 				handle.Completed += OnUnityAtlas_Completed;
 			});
@@ -81,7 +81,7 @@ public class Game1Scene : MonoBehaviour
 			var btn = CanvasRoot.transform.Find("tp_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/tpAtlas");
+				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/TexturePacker/tpAtlas");
 				_cachedSubAssetsOperationHandles.Add(handle);
 				handle.Completed += OnTpAtlasAsset_Completed;
 			});
@@ -157,11 +157,11 @@ public class Game1Scene : MonoBehaviour
 
 			var op1 = YooAssets.GetRawFileAsync("Config/config3");
 			await op1.Task;
-			UnityEngine.Debug.LogWarning(op1.LoadFileText());
+			UnityEngine.Debug.Log("await result : " + op1.LoadFileText());
 
 			var op2 = YooAssets.GetRawFileAsync("Config/config3");
 			await op2.Task;
-			UnityEngine.Debug.LogWarning(op2.LoadFileText());
+			UnityEngine.Debug.Log("await result : " + op2.LoadFileText());
 		}
 	}
 }
