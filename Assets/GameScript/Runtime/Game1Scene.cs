@@ -28,7 +28,7 @@ public class Game1Scene : MonoBehaviour
 	}
 	void OnDestroy()
 	{
-		foreach(var handle in _cachedAssetOperationHandles)
+		foreach (var handle in _cachedAssetOperationHandles)
 		{
 			handle.Release();
 		}
@@ -37,7 +37,7 @@ public class Game1Scene : MonoBehaviour
 		foreach (var handle in _cachedSubAssetsOperationHandles)
 		{
 			handle.Release();
-		}	
+		}
 		_cachedSubAssetsOperationHandles.Clear();
 	}
 	void OnGUI()
@@ -81,7 +81,7 @@ public class Game1Scene : MonoBehaviour
 			var btn = CanvasRoot.transform.Find("tp_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/TexturePacker/tpAtlas");
+				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/TexturePacker/tpAtlas1");
 				_cachedSubAssetsOperationHandles.Add(handle);
 				handle.Completed += OnTpAtlasAsset_Completed;
 			});
@@ -154,14 +154,6 @@ public class Game1Scene : MonoBehaviour
 			_cachedAssetOperationHandles.Add(handle);
 			await handle.Task;
 			rawImage.texture = handle.AssetObject as Texture;
-
-			var op1 = YooAssets.GetRawFileAsync("Config/config3");
-			await op1.Task;
-			UnityEngine.Debug.Log("await result : " + op1.LoadFileText());
-
-			var op2 = YooAssets.GetRawFileAsync("Config/config3");
-			await op2.Task;
-			UnityEngine.Debug.Log("await result : " + op2.LoadFileText());
 		}
 	}
 }

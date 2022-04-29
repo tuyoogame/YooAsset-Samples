@@ -38,6 +38,12 @@ MonoBehaviour:
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
       AssetTags: level3
+    - CollectPath: Assets/GameRes/Entity/Cube
+      AddressRuleName: AddressByFileName
+      PackRuleName: PackSeparately
+      FilterRuleName: CollectAll
+      NotWriteToAssetList: 0
+      AssetTags: 
   - GrouperName: Buildin
     GrouperDesc: "\u5185\u7F6E\u8D44\u6E90"
     AssetTags: buildin

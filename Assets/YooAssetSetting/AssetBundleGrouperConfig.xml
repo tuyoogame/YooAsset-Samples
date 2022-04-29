@@ -4,6 +4,7 @@
     <Collector CollectPath="Assets/GameRes/Entity/Level1/footman_Blue.prefab" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="level1" />
     <Collector CollectPath="Assets/GameRes/Entity/Level2/footman_Green.prefab" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="level2" />
     <Collector CollectPath="Assets/GameRes/Entity/Level3" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="level3" />
+    <Collector CollectPath="Assets/GameRes/Entity/Cube" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
   </Grouper>
   <Grouper GrouperName="Buildin" GrouperDesc="内置资源" AssetTags="buildin">
     <Collector CollectPath="Assets/GameRes/Scene" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectScene" NotWriteToAssetList="False" AssetTags="" />
@@ -12,7 +13,7 @@
   <Grouper GrouperName="Other" GrouperDesc="其它资源" AssetTags="other">
     <Collector CollectPath="Assets/GameRes/Music" AddressRule="AddressByFileName" PackRule="PackCollector" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
     <Collector CollectPath="Assets/GameRes/Texture" AddressRule="AddressByFileName" PackRule="PackCollector" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
-    <Collector CollectPath="Assets/GameRes/UIAtlas" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/UIAtlas" AddressRule="AddressByFileName" PackRule="PackTopDirectory" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
     <Collector CollectPath="Assets/GameRes/Config" AddressRule="AddressByFileName" PackRule="PackRawFile" FilterRule="CollectAll" NotWriteToAssetList="False" AssetTags="" />
   </Grouper>
   <Grouper GrouperName="Art" GrouperDesc="美术资源" AssetTags="">
