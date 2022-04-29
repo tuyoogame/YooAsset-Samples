@@ -37,18 +37,20 @@ namespace YooAsset.Editor
 
 			if (string.IsNullOrEmpty(_patchManifestPath) == false)
 			{
-				if (GUILayout.Button("导入补丁包", GUILayout.MaxWidth(150)))
+				if (GUILayout.Button("导入补丁包（内置文件）", GUILayout.MaxWidth(150)))
 				{
 					AssetBundleBuilderHelper.ClearStreamingAssetsFolder();
-					CopyBuildinPatchFiles(_patchManifestPath);
+					CopyPatchFiles(_patchManifestPath, false);
+				}
+				if (GUILayout.Button("导入补丁包（全部文件）", GUILayout.MaxWidth(150)))
+				{
+					AssetBundleBuilderHelper.ClearStreamingAssetsFolder();
+					CopyPatchFiles(_patchManifestPath, true);
 				}
 			}
 		}
 
-		/// <summary>
-		/// 拷贝资源补丁包里的内置资源到StreamingAssets目录
-		/// </summary>
-		private void CopyBuildinPatchFiles(string patchManifestFilePath)
+		private void CopyPatchFiles(string patchManifestFilePath, bool allPatchFile)
 		{
 			string manifestFileName = Path.GetFileNameWithoutExtension(patchManifestFilePath);
 			string outputDirectory = Path.GetDirectoryName(patchManifestFilePath);
@@ -56,7 +58,7 @@ namespace YooAsset.Editor
 			// 加载补丁清单
 			string jsonData = FileUtility.ReadFile(patchManifestFilePath);
 			PatchManifest patchManifest = PatchManifest.Deserialize(jsonData);
-			
+
 			// 拷贝核心文件
 			{
 				string sourcePath = $"{outputDirectory}/{manifestFileName}.bytes";
@@ -73,15 +75,29 @@ namespace YooAsset.Editor
 
 			// 拷贝文件列表
 			int fileCount = 0;
-			foreach (var patchBundle in patchManifest.BundleList)
-			{
-				if (patchBundle.IsBuildin == false)
-					continue;
 
-				fileCount++;
-				string sourcePath = $"{outputDirectory}/{patchBundle.Hash}";
-				string destPath = $"{AssetBundleBuilderHelper.GetStreamingAssetsFolderPath()}/{patchBundle.Hash}";
-				EditorTools.CopyFile(sourcePath, destPath, true);
+			if (allPatchFile)
+			{
+				foreach (var patchBundle in patchManifest.BundleList)
+				{
+					fileCount++;
+					string sourcePath = $"{outputDirectory}/{patchBundle.Hash}";
+					string destPath = $"{AssetBundleBuilderHelper.GetStreamingAssetsFolderPath()}/{patchBundle.Hash}";
+					EditorTools.CopyFile(sourcePath, destPath, true);
+				}
+			}
+			else
+			{
+				foreach (var patchBundle in patchManifest.BundleList)
+				{
+					if (patchBundle.IsBuildin == false)
+						continue;
+
+					fileCount++;
+					string sourcePath = $"{outputDirectory}/{patchBundle.Hash}";
+					string destPath = $"{AssetBundleBuilderHelper.GetStreamingAssetsFolderPath()}/{patchBundle.Hash}";
+					EditorTools.CopyFile(sourcePath, destPath, true);
+				}
 			}
 
 			Debug.Log($"补丁包拷贝完成，一共拷贝了{fileCount}个资源文件");
