@@ -72,6 +72,16 @@ public class BootScene : MonoBehaviour
 		string hostServerIP = "http://127.0.0.1";
 		string gameVersion = "v1.0";
 
+#if UNITY_EDITOR
+		if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android)
+			return $"{hostServerIP}/CDN/Android/{gameVersion}";
+		else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.iOS)
+			return $"{hostServerIP}/CDN/IPhone/{gameVersion}";
+		else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WebGL)
+			return $"{hostServerIP}/CDN/WebGL/{gameVersion}";
+		else
+			return $"{hostServerIP}/CDN/PC/{gameVersion}";
+#else
 		if (Application.platform == RuntimePlatform.Android)
 			return $"{hostServerIP}/CDN/Android/{gameVersion}";
 		else if (Application.platform == RuntimePlatform.IPhonePlayer)
@@ -80,5 +90,6 @@ public class BootScene : MonoBehaviour
 			return $"{hostServerIP}/CDN/WebGL/{gameVersion}";
 		else
 			return $"{hostServerIP}/CDN/PC/{gameVersion}";
+#endif
 	}
 }

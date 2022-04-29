@@ -85,9 +85,6 @@ ShaderVariantCollection:
   - first: {fileID: 4800000, guid: ba67c8b1d5e59dc428ad9fc9270f8353, type: 3}
     second:
       variants:
-      - keywords: 
+      - keywords: BILLBOARD_FACE_CAMERA_POS SHADOWS_SCREEN SHADOWS_SOFT SHADOWS_SPLIT_SPHERES
+          UNITY_HDR_ON _EMISSION _METALLICGLOSSMAP _NORMALMAP
         passType: 1
-      - keywords: SHADOWS_DEPTH
-        passType: 8
-      - keywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP
-        passType: 8

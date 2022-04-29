@@ -93,7 +93,7 @@ public class Game1Scene : MonoBehaviour
 			btn.onClick.AddListener(() =>
 			{
 				string savePath = $"{YooAssets.GetSandboxRoot()}/config1.txt";
-				RawFileOperation operation = YooAssets.LoadRawFileAsync("Config/config1.txt", savePath);
+				RawFileOperation operation = YooAssets.GetRawFileAsync("Config/config1.txt", savePath);
 				operation.Completed += OnRawFile_Completed;
 			});
 		}
@@ -123,7 +123,7 @@ public class Game1Scene : MonoBehaviour
 	{
 		var hint = CanvasRoot.transform.Find("config/icon/hint").GetComponent<Text>();
 		RawFileOperation op = operation as RawFileOperation;
-		hint.text = op.GetFileText();
+		hint.text = op.LoadFileText();
 	}
 
 	/// <summary>
@@ -154,6 +154,14 @@ public class Game1Scene : MonoBehaviour
 			_cachedAssetOperationHandles.Add(handle);
 			await handle.Task;
 			rawImage.texture = handle.AssetObject as Texture;
+
+			var op1 = YooAssets.GetRawFileAsync("Config/config3");
+			await op1.Task;
+			UnityEngine.Debug.LogWarning(op1.LoadFileText());
+
+			var op2 = YooAssets.GetRawFileAsync("Config/config3");
+			await op2.Task;
+			UnityEngine.Debug.LogWarning(op2.LoadFileText());
 		}
 	}
 }

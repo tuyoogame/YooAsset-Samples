@@ -169,22 +169,11 @@
             "ShaderName": "Mobile/Standard",
             "PassType": 1,
             "Keywords": [
-                ""
-            ]
-        },
-        {
-            "AssetPath": "Assets/GameArt/Shaders/StandardMobile.shader",
-            "ShaderName": "Mobile/Standard",
-            "PassType": 8,
-            "Keywords": [
-                "SHADOWS_DEPTH"
-            ]
-        },
-        {
-            "AssetPath": "Assets/GameArt/Shaders/StandardMobile.shader",
-            "ShaderName": "Mobile/Standard",
-            "PassType": 8,
-            "Keywords": [
+                "BILLBOARD_FACE_CAMERA_POS",
+                "SHADOWS_SCREEN",
+                "SHADOWS_SOFT",
+                "SHADOWS_SPLIT_SPHERES",
+                "UNITY_HDR_ON",
                 "_EMISSION",
                 "_METALLICGLOSSMAP",
                 "_NORMALMAP"

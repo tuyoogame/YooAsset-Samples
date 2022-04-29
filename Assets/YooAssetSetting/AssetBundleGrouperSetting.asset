@@ -72,7 +72,7 @@ MonoBehaviour:
       AssetTags: 
     - CollectPath: Assets/GameRes/UIAtlas
       AddressRuleName: AddressByFileName
-      PackRuleName: PackSeparately
+      PackRuleName: PackTopDirectory
       FilterRuleName: CollectAll
       NotWriteToAssetList: 0
       AssetTags: 
