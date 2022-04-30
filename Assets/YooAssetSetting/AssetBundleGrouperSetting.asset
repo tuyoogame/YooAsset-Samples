@@ -21,86 +21,92 @@ MonoBehaviour:
     AssetTags: level
     Collectors:
     - CollectPath: Assets/GameRes/Entity/Level1/footman_Blue.prefab
+      CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 0
       AssetTags: level1
     - CollectPath: Assets/GameRes/Entity/Level2/footman_Green.prefab
+      CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 0
       AssetTags: level2
     - CollectPath: Assets/GameRes/Entity/Level3
+      CollectorType: 0
       AddressRuleName: AddressByFileName
-      PackRuleName: PackSeparately
+      PackRuleName: PackDirectory
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 0
       AssetTags: level3
     - CollectPath: Assets/GameRes/Entity/Cube
+      CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 0
       AssetTags: 
   - GrouperName: Buildin
     GrouperDesc: "\u5185\u7F6E\u8D44\u6E90"
     AssetTags: buildin
     Collectors:
     - CollectPath: Assets/GameRes/Scene
+      CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectScene
-      NotWriteToAssetList: 0
       AssetTags: 
     - CollectPath: Assets/GameRes/UIFont
+      CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackDirectory
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 0
+      AssetTags: 
+    - CollectPath: Assets/GameRes/Config
+      CollectorType: 0
+      AddressRuleName: AddressByFileName
+      PackRuleName: PackRawFile
+      FilterRuleName: CollectAll
+      AssetTags: 
+    - CollectPath: Assets/GameRes/Shaders
+      CollectorType: 0
+      AddressRuleName: AddressByFileName
+      PackRuleName: PackDirectory
+      FilterRuleName: CollectAll
       AssetTags: 
   - GrouperName: Other
     GrouperDesc: "\u5176\u5B83\u8D44\u6E90"
     AssetTags: other
     Collectors:
     - CollectPath: Assets/GameRes/Music
+      CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackCollector
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 0
       AssetTags: 
     - CollectPath: Assets/GameRes/Texture
+      CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackCollector
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 0
       AssetTags: 
     - CollectPath: Assets/GameRes/UIAtlas
+      CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackTopDirectory
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 0
-      AssetTags: 
-    - CollectPath: Assets/GameRes/Config
-      AddressRuleName: AddressByFileName
-      PackRuleName: PackRawFile
-      FilterRuleName: CollectAll
-      NotWriteToAssetList: 0
       AssetTags: 
   - GrouperName: Art
     GrouperDesc: "\u7F8E\u672F\u8D44\u6E90"
     AssetTags: 
     Collectors:
     - CollectPath: Assets/GameArt/UISprite/UIIcons
+      CollectorType: 1
       AddressRuleName: AddressByFileName
       PackRuleName: PackDirectory
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 1
       AssetTags: 
     - CollectPath: Assets/GameArt/ShaderVariants
+      CollectorType: 1
       AddressRuleName: AddressByFileName
       PackRuleName: PackShaderVariants
       FilterRuleName: CollectAll
-      NotWriteToAssetList: 1
       AssetTags: 

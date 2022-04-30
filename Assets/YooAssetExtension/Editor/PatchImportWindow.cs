@@ -65,11 +65,14 @@ namespace YooAsset.Editor
 				string destPath = $"{AssetBundleBuilderHelper.GetStreamingAssetsFolderPath()}/{manifestFileName}.bytes";
 				EditorTools.CopyFile(sourcePath, destPath, true);
 			}
-
-			// 拷贝核心文件
 			{
 				string sourcePath = $"{outputDirectory}/{manifestFileName}.hash";
 				string destPath = $"{AssetBundleBuilderHelper.GetStreamingAssetsFolderPath()}/{manifestFileName}.hash";
+				EditorTools.CopyFile(sourcePath, destPath, true);
+			}
+			{
+				string sourcePath = $"{outputDirectory}/{YooAssetSettings.VersionFileName}";
+				string destPath = $"{AssetBundleBuilderHelper.GetStreamingAssetsFolderPath()}/{YooAssetSettings.VersionFileName}";
 				EditorTools.CopyFile(sourcePath, destPath, true);
 			}
 
