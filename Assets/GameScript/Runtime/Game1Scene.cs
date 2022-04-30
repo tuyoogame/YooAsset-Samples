@@ -47,8 +47,18 @@ public class Game1Scene : MonoBehaviour
 
 	void InitWindow()
 	{
-		var version = CanvasRoot.transform.Find("version/res_version").GetComponent<Text>();
-		version.text = $"Resource ver : {YooAssets.GetResourceVersion()}";
+		var resVersion = CanvasRoot.transform.Find("version/res_version").GetComponent<Text>();
+		resVersion.text = $"资源版本 : {YooAssets.GetResourceVersion()}";
+
+		var playMode = CanvasRoot.transform.Find("mode/play_mode").GetComponent<Text>();
+		if (BootScene.GamePlayMode == YooAssets.EPlayMode.EditorPlayMode)
+			playMode.text = "编辑器模拟运行";
+		else if (BootScene.GamePlayMode == YooAssets.EPlayMode.OfflinePlayMode)
+			playMode.text = "离线模式";
+		else if (BootScene.GamePlayMode == YooAssets.EPlayMode.HostPlayMode)
+			playMode.text = "网络模式";
+		else
+			throw new NotImplementedException();
 
 		// 同步加载预制体
 		{

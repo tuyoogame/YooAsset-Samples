@@ -1038,8 +1038,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 35204a17be9c96649b254d2bad80f4dd, type: 3}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 715939d12ae22b649b9f920fdc981c7c, type: 3}
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -1050,7 +1050,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Load main scene
+  m_Text: Home
 --- !u!222 &1259848599
 CanvasRenderer:
   m_ObjectHideFlags: 0

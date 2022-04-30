@@ -6,6 +6,7 @@ using YooAsset;
 public class BootScene : MonoBehaviour
 {
 	public static BootScene Instance { private set; get; }
+	public static YooAssets.EPlayMode GamePlayMode;
 
 	public YooAssets.EPlayMode PlayMode = YooAssets.EPlayMode.EditorPlayMode;
 
@@ -32,10 +33,11 @@ public class BootScene : MonoBehaviour
 
 	IEnumerator Start()
 	{
+		GamePlayMode = PlayMode;
 		Debug.Log($"资源系统运行模式：{PlayMode}");
 
 		// 编辑器模拟模式
-		if(PlayMode == YooAssets.EPlayMode.EditorPlayMode)
+		if (PlayMode == YooAssets.EPlayMode.EditorPlayMode)
 		{
 			var createParameters = new YooAssets.EditorPlayModeParameters();
 			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");

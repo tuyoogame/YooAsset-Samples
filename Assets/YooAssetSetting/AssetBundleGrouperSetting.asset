@@ -108,5 +108,11 @@ MonoBehaviour:
       CollectorType: 1
       AddressRuleName: AddressByFileName
       PackRuleName: PackShaderVariants
+      FilterRuleName: CollectShaderVariants
+      AssetTags: 
+    - CollectPath: Assets/GameArt/Entity/Cube
+      CollectorType: 2
+      AddressRuleName: AddressByFileName
+      PackRuleName: PackDirectory
       FilterRuleName: CollectAll
       AssetTags: 
