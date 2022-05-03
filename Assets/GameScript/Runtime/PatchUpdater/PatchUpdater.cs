@@ -11,7 +11,7 @@ public static class PatchUpdater
 	/// <summary>
 	/// 下载器
 	/// </summary>
-	public static DownloaderOperation Downloader { set; get; }
+	public static PatchDownloaderOperation Downloader { set; get; }
 
 	/// <summary>
 	/// 资源版本
