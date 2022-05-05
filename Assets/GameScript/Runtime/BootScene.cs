@@ -8,7 +8,7 @@ public class BootScene : MonoBehaviour
 	public static BootScene Instance { private set; get; }
 	public static YooAssets.EPlayMode GamePlayMode;
 
-	public YooAssets.EPlayMode PlayMode = YooAssets.EPlayMode.EditorPlayMode;
+	public YooAssets.EPlayMode PlayMode = YooAssets.EPlayMode.EditorSimulateMode;
 
 	void Awake()
 	{
@@ -36,15 +36,15 @@ public class BootScene : MonoBehaviour
 		GamePlayMode = PlayMode;
 		Debug.Log($"资源系统运行模式：{PlayMode}");
 
-		// 编辑器模拟模式
-		if (PlayMode == YooAssets.EPlayMode.EditorPlayMode)
+		// 编辑器下的模拟模式
+		if (PlayMode == YooAssets.EPlayMode.EditorSimulateMode)
 		{
-			var createParameters = new YooAssets.EditorPlayModeParameters();
+			var createParameters = new YooAssets.EditorSimulateModeParameters();
 			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");
 			yield return YooAssets.InitializeAsync(createParameters);
 		}
 
-		// 单机模式
+		// 单机运行模式
 		if (PlayMode == YooAssets.EPlayMode.OfflinePlayMode)
 		{
 			var createParameters = new YooAssets.OfflinePlayModeParameters();
@@ -52,7 +52,7 @@ public class BootScene : MonoBehaviour
 			yield return YooAssets.InitializeAsync(createParameters);
 		}
 
-		// 联机模式
+		// 联机运行模式
 		if (PlayMode == YooAssets.EPlayMode.HostPlayMode)
 		{
 			var createParameters = new YooAssets.HostPlayModeParameters();

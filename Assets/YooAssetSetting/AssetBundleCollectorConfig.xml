@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
+<root Version="1.0">
   <Common AutoAddressable="False" AutoCollectShader="True" ShaderBundleName="myshaders" />
   <Group GroupName="Level" GroupDesc="关卡资源" AssetTags="level">
     <Collector CollectPath="Assets/GameRes/Entity/Level1/footman_Blue.prefab" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" AssetTags="level1" />

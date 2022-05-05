@@ -51,12 +51,12 @@ public class Game1Scene : MonoBehaviour
 		resVersion.text = $"资源版本 : {YooAssets.GetResourceVersion()}";
 
 		var playMode = CanvasRoot.transform.Find("mode/play_mode").GetComponent<Text>();
-		if (BootScene.GamePlayMode == YooAssets.EPlayMode.EditorPlayMode)
-			playMode.text = "编辑器模拟运行";
+		if (BootScene.GamePlayMode == YooAssets.EPlayMode.EditorSimulateMode)
+			playMode.text = "编辑器下模拟模式";
 		else if (BootScene.GamePlayMode == YooAssets.EPlayMode.OfflinePlayMode)
-			playMode.text = "离线模式";
+			playMode.text = "离线运行模式";
 		else if (BootScene.GamePlayMode == YooAssets.EPlayMode.HostPlayMode)
-			playMode.text = "网络模式";
+			playMode.text = "网络运行模式";
 		else
 			throw new NotImplementedException();
 

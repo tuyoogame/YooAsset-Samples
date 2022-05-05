@@ -6,7 +6,7 @@ using YooAsset;
 
 public class TestScene : MonoBehaviour
 {
-	public YooAssets.EPlayMode PlayMode = YooAssets.EPlayMode.EditorPlayMode;
+	public YooAssets.EPlayMode PlayMode = YooAssets.EPlayMode.EditorSimulateMode;
 
 	void Awake()
 	{
@@ -23,9 +23,9 @@ public class TestScene : MonoBehaviour
 		Debug.Log($"资源系统运行模式：{PlayMode}");
 
 		// 编辑器模拟模式
-		if (PlayMode == YooAssets.EPlayMode.EditorPlayMode)
+		if (PlayMode == YooAssets.EPlayMode.EditorSimulateMode)
 		{
-			var createParameters = new YooAssets.EditorPlayModeParameters();
+			var createParameters = new YooAssets.EditorSimulateModeParameters();
 			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");
 			yield return YooAssets.InitializeAsync(createParameters);
 		}
