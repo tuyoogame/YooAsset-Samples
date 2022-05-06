@@ -12,6 +12,7 @@ public class Game1Scene : MonoBehaviour
 
 	private readonly List<AssetOperationHandle> _cachedAssetOperationHandles = new List<AssetOperationHandle>(1000);
 	private readonly List<SubAssetsOperationHandle> _cachedSubAssetsOperationHandles = new List<SubAssetsOperationHandle>(1000);
+	private readonly List<AllAssetsOperationHandle> _cachedAllAssetsOperationHandles = new List<AllAssetsOperationHandle>(1000);
 
 	void Start()
 	{
@@ -39,6 +40,12 @@ public class Game1Scene : MonoBehaviour
 			handle.Release();
 		}
 		_cachedSubAssetsOperationHandles.Clear();
+
+		foreach (var handle in _cachedAllAssetsOperationHandles)
+		{
+			handle.Release();
+		}
+		_cachedAllAssetsOperationHandles.Clear();
 	}
 	void OnGUI()
 	{
@@ -47,10 +54,10 @@ public class Game1Scene : MonoBehaviour
 
 	void InitWindow()
 	{
-		var resVersion = CanvasRoot.transform.Find("version/res_version").GetComponent<Text>();
+		var resVersion = CanvasRoot.transform.Find("res_version/label").GetComponent<Text>();
 		resVersion.text = $"资源版本 : {YooAssets.GetResourceVersion()}";
 
-		var playMode = CanvasRoot.transform.Find("mode/play_mode").GetComponent<Text>();
+		var playMode = CanvasRoot.transform.Find("play_mode/label").GetComponent<Text>();
 		if (BootScene.GamePlayMode == YooAssets.EPlayMode.EditorSimulateMode)
 			playMode.text = "编辑器下模拟模式";
 		else if (BootScene.GamePlayMode == YooAssets.EPlayMode.OfflinePlayMode)
@@ -62,10 +69,10 @@ public class Game1Scene : MonoBehaviour
 
 		// 同步加载预制体
 		{
-			var btn = CanvasRoot.transform.Find("entity/btn").GetComponent<Button>();
+			var btn = CanvasRoot.transform.Find("load_npc/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				var icon = CanvasRoot.transform.Find("entity/icon").GetComponent<Image>();
+				var icon = CanvasRoot.transform.Find("load_npc/icon").GetComponent<Image>();
 				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>("Entity/Level1/footman_Blue");
 				_cachedAssetOperationHandles.Add(handle);
 				GameObject go = handle.InstantiateSync(icon.transform);
@@ -75,9 +82,28 @@ public class Game1Scene : MonoBehaviour
 			});
 		}
 
+		// 同步加载所有资源
+		{
+			var btn = CanvasRoot.transform.Find("load_sphere/btn").GetComponent<Button>();
+			btn.onClick.AddListener(() =>
+			{
+				var icon = CanvasRoot.transform.Find("load_sphere/icon").GetComponent<Image>();
+				AllAssetsOperationHandle handle = YooAssets.LoadAllAssetsSync<GameObject>("Entity/Sphere/sphere1");
+				_cachedAllAssetsOperationHandles.Add(handle);
+				int pos = -40;
+				foreach (var assetObj in handle.AllAssetObjects)
+				{
+					GameObject go = GameObject.Instantiate<GameObject>(assetObj as GameObject, icon.transform);
+					go.transform.localPosition = new Vector3(pos, 0, -100);
+					go.transform.localScale = Vector3.one * 50;
+					pos += 40;
+				}
+			});
+		}
+
 		// 异步加载Unity官方生成的图集
 		{
-			var btn = CanvasRoot.transform.Find("unity_atlas/btn").GetComponent<Button>();
+			var btn = CanvasRoot.transform.Find("load_unity_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
 				AssetOperationHandle handle = YooAssets.LoadAssetAsync<SpriteAtlas>("UIAtlas/UnityPacker/unityAtlas");
@@ -88,7 +114,7 @@ public class Game1Scene : MonoBehaviour
 
 		// 异步加载TexturePacker生成的图集
 		{
-			var btn = CanvasRoot.transform.Find("tp_atlas/btn").GetComponent<Button>();
+			var btn = CanvasRoot.transform.Find("load_tp_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
 				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/TexturePacker/tpAtlas1");
@@ -99,7 +125,7 @@ public class Game1Scene : MonoBehaviour
 
 		// 异步加载原生文件
 		{
-			var btn = CanvasRoot.transform.Find("config/btn").GetComponent<Button>();
+			var btn = CanvasRoot.transform.Find("load_rawfile/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
 				string savePath = $"{YooAssets.GetSandboxRoot()}/config1.txt";
@@ -110,28 +136,28 @@ public class Game1Scene : MonoBehaviour
 
 		// 异步加载主场景
 		{
-			var btn = CanvasRoot.transform.Find("sceneBtn").GetComponent<Button>();
+			var btn = CanvasRoot.transform.Find("load_scene").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				YooAssets.LoadSceneAsync("Scene/Game2");
+				YooAssets.LoadSceneAsync("Scene/Game2.unity");
 			});
 		}
 	}
 
 	private void OnUnityAtlas_Completed(AssetOperationHandle handle)
 	{
-		var icon = CanvasRoot.transform.Find("unity_atlas/icon").GetComponent<Image>();
+		var icon = CanvasRoot.transform.Find("load_unity_atlas/icon").GetComponent<Image>();
 		SpriteAtlas atlas = handle.AssetObject as SpriteAtlas;
 		icon.sprite = atlas.GetSprite("Icon_Arrows_128");
 	}
 	private void OnTpAtlasAsset_Completed(SubAssetsOperationHandle handle)
 	{
-		var icon = CanvasRoot.transform.Find("tp_atlas/icon").GetComponent<Image>();
+		var icon = CanvasRoot.transform.Find("load_tp_atlas/icon").GetComponent<Image>();
 		icon.sprite = handle.GetSubAssetObject<Sprite>("Icon_Arrows_128");
 	}
 	private void OnRawFile_Completed(AsyncOperationBase operation)
 	{
-		var hint = CanvasRoot.transform.Find("config/icon/hint").GetComponent<Text>();
+		var hint = CanvasRoot.transform.Find("load_rawfile/icon/hint").GetComponent<Text>();
 		RawFileOperation op = operation as RawFileOperation;
 		hint.text = op.LoadFileText();
 	}
@@ -159,7 +185,7 @@ public class Game1Scene : MonoBehaviour
 	{
 		// 加载背景图片
 		{
-			var rawImage = CanvasRoot.transform.Find("texture").GetComponent<RawImage>();
+			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
 			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Texture>("Texture/bg2.jpeg");
 			_cachedAssetOperationHandles.Add(handle);
 			await handle.Task;

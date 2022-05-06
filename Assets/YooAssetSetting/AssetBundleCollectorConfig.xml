@@ -2,10 +2,11 @@
 <root Version="1.0">
   <Common AutoAddressable="False" AutoCollectShader="True" ShaderBundleName="myshaders" />
   <Group GroupName="Level" GroupDesc="关卡资源" AssetTags="level">
-    <Collector CollectPath="Assets/GameRes/Entity/Level1/footman_Blue.prefab" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" AssetTags="level1" />
-    <Collector CollectPath="Assets/GameRes/Entity/Level2/footman_Green.prefab" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" AssetTags="level2" />
-    <Collector CollectPath="Assets/GameRes/Entity/Level3" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="level3" />
-    <Collector CollectPath="Assets/GameRes/Entity/Cube" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectAll" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/Entity/Level1/footman_Blue.prefab" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectPrefab" AssetTags="level1" />
+    <Collector CollectPath="Assets/GameRes/Entity/Level2/footman_Green.prefab" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectPrefab" AssetTags="level2" />
+    <Collector CollectPath="Assets/GameRes/Entity/Level3" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectPrefab" AssetTags="level3" />
+    <Collector CollectPath="Assets/GameRes/Entity/Cube" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectPrefab" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/Entity/Sphere" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="" />
   </Group>
   <Group GroupName="Buildin" GroupDesc="内置资源" AssetTags="buildin">
     <Collector CollectPath="Assets/GameRes/Scene" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectScene" AssetTags="" />

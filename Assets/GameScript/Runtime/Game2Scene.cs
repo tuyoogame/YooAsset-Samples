@@ -36,24 +36,9 @@ public class Game2Scene : MonoBehaviour
 
 	void InitWindow()
 	{
-		// 同步加载预制体
-		{
-			var btn = CanvasRoot.transform.Find("entity/btn").GetComponent<Button>();
-			btn.onClick.AddListener(() =>
-			{
-				var icon = CanvasRoot.transform.Find("entity/icon").GetComponent<Image>();
-				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>("Entity/Level1/footman_Blue");
-				_cachedAssetOperationHandles.Add(handle);
-				GameObject go = handle.InstantiateSync(icon.transform);
-				go.transform.localPosition = new Vector3(0, -50, -100);
-				go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);
-				go.transform.localScale = Vector3.one * 50;
-			});
-		}
-
 		// 异步加载主场景
 		{
-			var btn = CanvasRoot.transform.Find("sceneBtn").GetComponent<Button>();
+			var btn = CanvasRoot.transform.Find("load_scene").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
 				YooAssets.LoadSceneAsync("Scene/Game1");
@@ -100,7 +85,7 @@ public class Game2Scene : MonoBehaviour
 
 		// 加载背景图片
 		{
-			var rawImage = CanvasRoot.transform.Find("texture").GetComponent<RawImage>();
+			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
 			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Texture>("Texture/bg3.jpeg");
 			_cachedAssetOperationHandles.Add(handle);
 			yield return handle;

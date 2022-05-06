@@ -24,24 +24,30 @@ MonoBehaviour:
       CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
-      FilterRuleName: CollectAll
+      FilterRuleName: CollectPrefab
       AssetTags: level1
     - CollectPath: Assets/GameRes/Entity/Level2/footman_Green.prefab
       CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
-      FilterRuleName: CollectAll
+      FilterRuleName: CollectPrefab
       AssetTags: level2
     - CollectPath: Assets/GameRes/Entity/Level3
       CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackDirectory
-      FilterRuleName: CollectAll
+      FilterRuleName: CollectPrefab
       AssetTags: level3
     - CollectPath: Assets/GameRes/Entity/Cube
       CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
+      FilterRuleName: CollectPrefab
+      AssetTags: 
+    - CollectPath: Assets/GameRes/Entity/Sphere
+      CollectorType: 0
+      AddressRuleName: AddressByFileName
+      PackRuleName: PackDirectory
       FilterRuleName: CollectAll
       AssetTags: 
   - GroupName: Buildin
