@@ -51,10 +51,15 @@ public class LoadAssetsByTagOperation<TObject> : GameAsyncOperation where TObjec
 
 		if (_steps == ESteps.CheckResult)
 		{
-			foreach(var handle in _handles)
-			{
+			int index = 0;
+			foreach (var handle in _handles)
+			{			
 				if (handle.IsDone == false)
+				{
+					Progress = (float)index / _handles.Count;
 					return;
+				}
+				index++;
 			}
 
 			AssetObjects = new List<TObject>(_handles.Count);
@@ -100,7 +105,7 @@ public class LoadAssetsByTagOperation<TObject> : GameAsyncOperation where TObjec
 	/// </summary>
 	public void ReleaseHandle()
 	{
-		foreach(var handle in _handles)
+		foreach (var handle in _handles)
 		{
 			handle.Release();
 		}

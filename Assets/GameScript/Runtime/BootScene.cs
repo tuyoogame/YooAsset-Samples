@@ -41,6 +41,7 @@ public class BootScene : MonoBehaviour
 		{
 			var createParameters = new YooAssets.EditorSimulateModeParameters();
 			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");
+			//createParameters.SimulatePatchManifestPath = GetPatchManifestPath();
 			yield return YooAssets.InitializeAsync(createParameters);
 		}
 
@@ -68,6 +69,11 @@ public class BootScene : MonoBehaviour
 		PatchUpdater.Run();
 	}
 
+	private string GetPatchManifestPath()
+	{
+		string directory = System.IO.Path.GetDirectoryName(Application.dataPath);
+		return $"{directory}/Bundles/StandaloneWindows64/UnityManifest_SimulateBuild/PatchManifest_100.bytes";
+	}
 	private string GetHostServerURL()
 	{
 		//string hostServerIP = "http://10.0.2.2"; //安卓模拟器地址
