@@ -12,7 +12,6 @@ public class Game1Scene : MonoBehaviour
 
 	private readonly List<AssetOperationHandle> _cachedAssetOperationHandles = new List<AssetOperationHandle>(1000);
 	private readonly List<SubAssetsOperationHandle> _cachedSubAssetsOperationHandles = new List<SubAssetsOperationHandle>(1000);
-	private readonly List<AllAssetsOperationHandle> _cachedAllAssetsOperationHandles = new List<AllAssetsOperationHandle>(1000);
 
 	void Start()
 	{
@@ -40,12 +39,6 @@ public class Game1Scene : MonoBehaviour
 			handle.Release();
 		}
 		_cachedSubAssetsOperationHandles.Clear();
-
-		foreach (var handle in _cachedAllAssetsOperationHandles)
-		{
-			handle.Release();
-		}
-		_cachedAllAssetsOperationHandles.Clear();
 	}
 	void OnGUI()
 	{
@@ -79,25 +72,6 @@ public class Game1Scene : MonoBehaviour
 				go.transform.localPosition = new Vector3(0, -50, -100);
 				go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);
 				go.transform.localScale = Vector3.one * 50;
-			});
-		}
-
-		// 同步加载所有资源
-		{
-			var btn = CanvasRoot.transform.Find("load_sphere/btn").GetComponent<Button>();
-			btn.onClick.AddListener(() =>
-			{
-				var icon = CanvasRoot.transform.Find("load_sphere/icon").GetComponent<Image>();
-				AllAssetsOperationHandle handle = YooAssets.LoadAllAssetsSync<GameObject>("Entity/Sphere/sphere1");
-				_cachedAllAssetsOperationHandles.Add(handle);
-				int pos = -40;
-				foreach (var assetObj in handle.AllAssetObjects)
-				{
-					GameObject go = GameObject.Instantiate<GameObject>(assetObj as GameObject, icon.transform);
-					go.transform.localPosition = new Vector3(pos, 0, -100);
-					go.transform.localScale = Vector3.one * 50;
-					pos += 40;
-				}
 			});
 		}
 
@@ -175,6 +149,14 @@ public class Game1Scene : MonoBehaviour
 			yield return handle;
 			audioSource.clip = handle.AssetObject as AudioClip;
 			audioSource.Play();
+		}
+
+		LoadAssetsByTagOperation<GameObject> op = new LoadAssetsByTagOperation<GameObject>("sphere");
+		YooAssets.ProcessOperaiton(op);
+		yield return op;
+		foreach (var assetObj in op.AssetObjects)
+		{
+			Debug.LogWarning(assetObj.name);
 		}
 	}
 

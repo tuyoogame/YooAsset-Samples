@@ -43,13 +43,13 @@ MonoBehaviour:
       AddressRuleName: AddressByFileName
       PackRuleName: PackSeparately
       FilterRuleName: CollectPrefab
-      AssetTags: 
+      AssetTags: cube
     - CollectPath: Assets/GameRes/Entity/Sphere
       CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackDirectory
       FilterRuleName: CollectAll
-      AssetTags: 
+      AssetTags: sphere
   - GroupName: Buildin
     GroupDesc: "\u5185\u7F6E\u8D44\u6E90"
     AssetTags: buildin
