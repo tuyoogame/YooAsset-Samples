@@ -151,12 +151,13 @@ public class Game1Scene : MonoBehaviour
 			audioSource.Play();
 		}
 
+		// 通过资源标签加载资源
 		LoadAssetsByTagOperation<GameObject> op = new LoadAssetsByTagOperation<GameObject>("sphere");
 		YooAssets.ProcessOperaiton(op);
 		yield return op;
 		foreach (var assetObj in op.AssetObjects)
 		{
-			Debug.LogWarning(assetObj.name);
+			Debug.Log("LoadAssetsByTag : " + assetObj.name);
 		}
 	}
 
