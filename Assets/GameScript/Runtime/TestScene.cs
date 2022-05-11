@@ -170,8 +170,8 @@ public class TestScene : MonoBehaviour
 		await TaskTest1();
 		await TaskTest2();
 
-		// 结束测试
-		OverTest();
+		// 开始错误测试
+		ErrorTest();
 	}
 	async Task TaskTest1()
 	{
@@ -194,6 +194,28 @@ public class TestScene : MonoBehaviour
 		Debug.Assert(operation.Status == EOperationStatus.Succeed);
 		await operation.Task;
 		Debug.Assert(operation.Status == EOperationStatus.Succeed);
+	}
+	#endregion
+
+	#region 错误测试
+	void ErrorTest()
+	{
+		AutoTestLog($"开始错误加载的测试 !");
+
+		var handle1 = YooAssets.LoadAssetSync<GameObject>("");
+		Debug.Assert(handle1.Status == EOperationStatus.Failed);
+
+		var handle2 = YooAssets.LoadAssetSync<GameObject>("xxx1");
+		Debug.Assert(handle2.Status == EOperationStatus.Failed);
+
+		var result = YooAssets.IsNeedDownloadFromRemote("xxx2");
+		Debug.Assert(result == false);
+
+		var operaiton = YooAssets.GetRawFileAsync("xxx3");
+		Debug.Assert(operaiton.Status == EOperationStatus.Failed);
+
+		// 结束测试
+		OverTest();
 	}
 	#endregion
 }

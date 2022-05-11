@@ -5,12 +5,11 @@
     <Collector CollectPath="Assets/GameRes/Entity/Level1/footman_Blue.prefab" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectPrefab" AssetTags="level1" />
     <Collector CollectPath="Assets/GameRes/Entity/Level2/footman_Green.prefab" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectPrefab" AssetTags="level2" />
     <Collector CollectPath="Assets/GameRes/Entity/Level3" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectPrefab" AssetTags="level3" />
-    <Collector CollectPath="Assets/GameRes/Entity/Cube" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectPrefab" AssetTags="" />
-    <Collector CollectPath="Assets/GameRes/Entity/Sphere" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="" />
+    <Collector CollectPath="Assets/GameRes/Entity/Cube" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectPrefab" AssetTags="cube" />
+    <Collector CollectPath="Assets/GameRes/Entity/Sphere" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="sphere" />
   </Group>
   <Group GroupName="Buildin" GroupDesc="内置资源" AssetTags="buildin">
     <Collector CollectPath="Assets/GameRes/Scene" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackSeparately" FilterRule="CollectScene" AssetTags="" />
-    <Collector CollectPath="Assets/GameRes/UIFont" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="" />
     <Collector CollectPath="Assets/GameRes/Config" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackRawFile" FilterRule="CollectAll" AssetTags="" />
     <Collector CollectPath="Assets/GameRes/Shaders" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="" />
   </Group>
@@ -22,6 +21,7 @@
   <Group GroupName="Art" GroupDesc="美术资源" AssetTags="">
     <Collector CollectPath="Assets/GameArt/UISprite/UIIcons" CollectType="StaticAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="" />
     <Collector CollectPath="Assets/GameArt/ShaderVariants" CollectType="StaticAssetCollector" AddressRule="AddressByFileName" PackRule="PackShaderVariants" FilterRule="CollectAll" AssetTags="" />
-    <Collector CollectPath="Assets/GameArt/Entity/Cube" CollectType="DependAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="" />
+    <Collector CollectPath="Assets/GameArt/Entity/Gometry" CollectType="DependAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="" />
+    <Collector CollectPath="Assets/GameArt/UIFont" CollectType="DependAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" AssetTags="" />
   </Group>
 </root>

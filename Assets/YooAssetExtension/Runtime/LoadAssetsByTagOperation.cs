@@ -74,7 +74,7 @@ public class LoadAssetsByTagOperation<TObject> : GameAsyncOperation where TObjec
 					}
 					else
 					{
-						string error = $"资源类型转换失败：{assetObject.name}";
+						string error = $"资源类型转换失败：{handle.AssetObject.name}";
 						Debug.LogError($"{error}");
 						AssetObjects.Clear();
 						SetFinish(false, error);

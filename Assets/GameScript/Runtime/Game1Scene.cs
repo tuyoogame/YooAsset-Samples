@@ -152,12 +152,15 @@ public class Game1Scene : MonoBehaviour
 		}
 
 		// 通过资源标签加载资源
-		LoadAssetsByTagOperation<GameObject> op = new LoadAssetsByTagOperation<GameObject>("sphere");
-		YooAssets.ProcessOperaiton(op);
-		yield return op;
-		foreach (var assetObj in op.AssetObjects)
 		{
-			Debug.Log("LoadAssetsByTag : " + assetObj.name);
+			LoadAssetsByTagOperation<GameObject> operation = new LoadAssetsByTagOperation<GameObject>("sphere");
+			YooAssets.StartOperaiton(operation);
+			yield return operation;
+			foreach (var assetObj in operation.AssetObjects)
+			{
+				Debug.Log("LoadAssetsByTag : " + assetObj.name);
+			}
+			operation.ReleaseHandle(); //注意：释放资源句柄
 		}
 	}
 

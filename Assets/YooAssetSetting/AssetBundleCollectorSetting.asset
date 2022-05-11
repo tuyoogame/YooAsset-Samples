@@ -60,12 +60,6 @@ MonoBehaviour:
       PackRuleName: PackSeparately
       FilterRuleName: CollectScene
       AssetTags: 
-    - CollectPath: Assets/GameRes/UIFont
-      CollectorType: 0
-      AddressRuleName: AddressByFileName
-      PackRuleName: PackDirectory
-      FilterRuleName: CollectAll
-      AssetTags: 
     - CollectPath: Assets/GameRes/Config
       CollectorType: 0
       AddressRuleName: AddressByFileName
@@ -116,7 +110,13 @@ MonoBehaviour:
       PackRuleName: PackShaderVariants
       FilterRuleName: CollectAll
       AssetTags: 
-    - CollectPath: Assets/GameArt/Entity/Cube
+    - CollectPath: Assets/GameArt/Entity/Gometry
+      CollectorType: 2
+      AddressRuleName: AddressByFileName
+      PackRuleName: PackDirectory
+      FilterRuleName: CollectAll
+      AssetTags: 
+    - CollectPath: Assets/GameArt/UIFont
       CollectorType: 2
       AddressRuleName: AddressByFileName
       PackRuleName: PackDirectory
