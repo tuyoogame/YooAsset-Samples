@@ -59,7 +59,6 @@ sysinfo.txt
 crashlytics-build.properties
 
 *.vsconfig
-Assets/YooAsset/
 Assets/StreamingAssets/
 Assets/StreamingAssets.meta
 Bundles
