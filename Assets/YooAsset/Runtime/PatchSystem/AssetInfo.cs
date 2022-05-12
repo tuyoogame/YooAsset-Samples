@@ -56,6 +56,8 @@ namespace YooAsset
 		/// </summary>
 		public System.Type AssetType { private set; get; }
 
+
+		// 注意：这是一个内部类，严格限制外部创建。
 		private AssetInfo()
 		{
 		}
