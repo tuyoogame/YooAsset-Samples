@@ -175,5 +175,14 @@ public class Game1Scene : MonoBehaviour
 			await handle.Task;
 			rawImage.texture = handle.AssetObject as Texture;
 		}
+
+		// 加载LOGO
+		{
+			var logoImage = CanvasRoot.transform.Find("title/logo").GetComponent<Image>();
+			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Sprite>("Texture/logo.png");
+			_cachedAssetOperationHandles.Add(handle);
+			await handle.Task;
+			logoImage.sprite = handle.AssetObject as Sprite;
+		}
 	}
 }
