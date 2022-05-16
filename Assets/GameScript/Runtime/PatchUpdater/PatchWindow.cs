@@ -13,10 +13,8 @@ public class PatchWindow : MonoBehaviour
 	{
 		private GameObject _cloneObject;
 		private Text _content;
-		private Button _btnYes;
-		private Button _btnNo;
-		private System.Action _clickYes;
-		private System.Action _clickNo;
+		private Button _btnOK;
+		private System.Action _clickOK;
 
 		public bool ActiveSelf
 		{
@@ -30,47 +28,25 @@ public class PatchWindow : MonoBehaviour
 		{
 			_cloneObject = cloneObject;
 			_content = cloneObject.transform.Find("txt_content").GetComponent<Text>();
-			_btnYes = cloneObject.transform.Find("btn_yes").GetComponent<Button>();
-			_btnYes.onClick.AddListener(OnClickYes);
-			_btnNo = cloneObject.transform.Find("btn_no").GetComponent<Button>();
-			_btnNo.onClick.AddListener(OnClickNo);
+			_btnOK = cloneObject.transform.Find("btn_ok").GetComponent<Button>();
+			_btnOK.onClick.AddListener(OnClickYes);
 		}
-		public void Show(string content, System.Action clickYes)
+		public void Show(string content, System.Action clickOK)
 		{
 			_content.text = content;
-			var rectTrans = _btnYes.transform as RectTransform;
-			rectTrans.anchoredPosition = new Vector2(0, -126);
-			_btnNo.gameObject.SetActive(false);
-			_clickYes = clickYes;
-			_clickNo = null;
-			_cloneObject.SetActive(true);
-			_cloneObject.transform.SetAsLastSibling();
-		}
-		public void Show(string content, System.Action clickYes, System.Action clickNo)
-		{
-			_content.text = content;
-			var rectTrans = _btnYes.transform as RectTransform;
-			rectTrans.anchoredPosition = new Vector2(-178, -126);
-			_btnNo.gameObject.SetActive(true);
-			_clickYes = clickYes;
-			_clickNo = clickNo;
+			_clickOK = clickOK;
 			_cloneObject.SetActive(true);
 			_cloneObject.transform.SetAsLastSibling();
 		}
 		public void Hide()
 		{
 			_content.text = string.Empty;
-			_clickYes = null;
+			_clickOK = null;
 			_cloneObject.SetActive(false);
 		}
 		private void OnClickYes()
 		{
-			_clickYes?.Invoke();
-			Hide();
-		}
-		private void OnClickNo()
-		{
-			_clickNo?.Invoke();
+			_clickOK?.Invoke();
 			Hide();
 		}
 	}
@@ -180,7 +156,7 @@ public class PatchWindow : MonoBehaviour
 	/// <summary>
 	/// 显示对话框
 	/// </summary>
-	private void ShowMessageBox(string content, System.Action yes, System.Action no = null)
+	private void ShowMessageBox(string content, System.Action ok)
 	{
 		// 尝试获取一个可用的对话框
 		MessageBox msgBox = null;
@@ -204,9 +180,6 @@ public class PatchWindow : MonoBehaviour
 		}
 
 		// 显示对话框
-		if (no == null)
-			msgBox.Show(content, yes);
-		else
-			msgBox.Show(content, yes, no);
+		msgBox.Show(content, ok);
 	}
 }

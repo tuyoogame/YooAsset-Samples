@@ -86,7 +86,7 @@ public class TestScene : MonoBehaviour
 	void SyncTest2()
 	{
 		AutoTestLog($"开始同步加载TexturePacker图集测试 !");
-		var handle = YooAssets.LoadSubAssetsSync<Sprite>("UIAtlas/TexturePacker/tpAtlas1");
+		var handle = YooAssets.LoadSubAssetsSync<Sprite>("UIAtlas/TexturePacker/tpAtlas");
 		Debug.Assert(handle.Status == EOperationStatus.Succeed);
 		var sprite = handle.GetSubAssetObject<Sprite>("Icon_Sword_128");
 		Debug.Assert(sprite != null);

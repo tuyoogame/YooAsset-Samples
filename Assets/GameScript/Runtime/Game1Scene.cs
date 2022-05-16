@@ -12,6 +12,7 @@ public class Game1Scene : MonoBehaviour
 
 	private readonly List<AssetOperationHandle> _cachedAssetOperationHandles = new List<AssetOperationHandle>(1000);
 	private readonly List<SubAssetsOperationHandle> _cachedSubAssetsOperationHandles = new List<SubAssetsOperationHandle>(1000);
+	private int _npcIndex = 0;
 
 	void Start()
 	{
@@ -20,11 +21,8 @@ public class Game1Scene : MonoBehaviour
 		// 初始化窗口
 		InitWindow();
 
-		// 异步编程
-		this.StartCoroutine(AsyncLoad1());
-
-		// 异步编程
-		AsyncLoad2();
+		// 异步加载背景音乐
+		AsyncLoadMusic();
 	}
 	void OnDestroy()
 	{
@@ -60,22 +58,60 @@ public class Game1Scene : MonoBehaviour
 		else
 			throw new NotImplementedException();
 
+		// 通过资源标签加载资源
+		{
+			string assetTag = "sphere";
+			AssetInfo[] assetInfos = YooAssets.GetAssetInfos(assetTag);
+			foreach (var assetInfo in assetInfos)
+			{
+				Debug.Log($"{assetInfo.AssetPath}");
+			}
+		}
+
+		// 同步加载背景图片
+		{
+			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
+			AssetOperationHandle handle = YooAssets.LoadAssetSync<Texture>("Texture/bg");
+			_cachedAssetOperationHandles.Add(handle);
+			rawImage.texture = handle.AssetObject as Texture;
+		}
+
+		// 同步加载LOGO
+		{
+			var logoImage = CanvasRoot.transform.Find("title/logo").GetComponent<Image>();
+			AssetOperationHandle handle = YooAssets.LoadAssetSync<Sprite>("Texture/logo.png");
+			_cachedAssetOperationHandles.Add(handle);
+			logoImage.sprite = handle.AssetObject as Sprite;
+		}
+
 		// 同步加载预制体
 		{
+			string[] entityAssetNames = 
+			{ 
+				"Level1/footman_Blue",
+				"Level2/footman_Green",
+				"Level3/footman_Red",
+				"Level3/footman_Yellow"
+			};
+
 			var btn = CanvasRoot.transform.Find("load_npc/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				var icon = CanvasRoot.transform.Find("load_npc/icon").GetComponent<Image>();
-				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>("Entity/Level1/footman_Blue");
+				var icon = CanvasRoot.transform.Find("load_npc/icon").GetComponent<Image>();		
+				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>($"Entity/{entityAssetNames[_npcIndex]}");
 				_cachedAssetOperationHandles.Add(handle);
 				GameObject go = handle.InstantiateSync(icon.transform);
 				go.transform.localPosition = new Vector3(0, -50, -100);
 				go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);
 				go.transform.localScale = Vector3.one * 50;
+
+				_npcIndex++;
+				if (_npcIndex > 3)
+					_npcIndex = 0;
 			});
 		}
 
-		// 异步加载Unity官方生成的图集
+		// 异步加载UnityEngine生成的图集
 		{
 			var btn = CanvasRoot.transform.Find("load_unity_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
@@ -91,7 +127,7 @@ public class Game1Scene : MonoBehaviour
 			var btn = CanvasRoot.transform.Find("load_tp_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/TexturePacker/tpAtlas1");
+				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/TexturePacker/tpAtlas");
 				_cachedSubAssetsOperationHandles.Add(handle);
 				handle.Completed += OnTpAtlasAsset_Completed;
 			});
@@ -127,7 +163,7 @@ public class Game1Scene : MonoBehaviour
 	private void OnTpAtlasAsset_Completed(SubAssetsOperationHandle handle)
 	{
 		var icon = CanvasRoot.transform.Find("load_tp_atlas/icon").GetComponent<Image>();
-		icon.sprite = handle.GetSubAssetObject<Sprite>("Icon_Arrows_128");
+		icon.sprite = handle.GetSubAssetObject<Sprite>("Icon_Shield_128");
 	}
 	private void OnRawFile_Completed(AsyncOperationBase operation)
 	{
@@ -137,52 +173,18 @@ public class Game1Scene : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 异步编程方式1
+	/// 异步加载背景音乐
 	/// </summary>
-	IEnumerator AsyncLoad1()
+	async void AsyncLoadMusic()
 	{
 		// 加载背景音乐
 		{
 			var audioSource = CanvasRoot.transform.Find("music").GetComponent<AudioSource>();
-			AssetOperationHandle handle = YooAssets.LoadAssetAsync<AudioClip>("Music/town.mp3");
+			AssetOperationHandle handle = YooAssets.LoadAssetAsync<AudioClip>("Music/town");
 			_cachedAssetOperationHandles.Add(handle);
-			yield return handle;
+			await handle.Task;
 			audioSource.clip = handle.AssetObject as AudioClip;
 			audioSource.Play();
-		}
-
-		// 通过资源标签加载资源
-		{
-			string assetTag = "sphere";
-			AssetInfo[] assetInfos= YooAssets.GetAssetInfos(assetTag);
-			foreach(var assetInfo in assetInfos)
-			{
-				Debug.Log($"{assetInfo.AssetPath}");
-			}
-		}
-	}
-
-	/// <summary>
-	/// 异步编程方式2
-	/// </summary>
-	async void AsyncLoad2()
-	{
-		// 加载背景图片
-		{
-			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
-			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Texture>("Texture/bg2.jpeg");
-			_cachedAssetOperationHandles.Add(handle);
-			await handle.Task;
-			rawImage.texture = handle.AssetObject as Texture;
-		}
-
-		// 加载LOGO
-		{
-			var logoImage = CanvasRoot.transform.Find("title/logo").GetComponent<Image>();
-			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Sprite>("Texture/logo.png");
-			_cachedAssetOperationHandles.Add(handle);
-			await handle.Task;
-			logoImage.sprite = handle.AssetObject as Sprite;
 		}
 	}
 }

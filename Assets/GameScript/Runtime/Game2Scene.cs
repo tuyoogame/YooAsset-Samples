@@ -19,7 +19,8 @@ public class Game2Scene : MonoBehaviour
 		// 初始化窗口
 		InitWindow();
 
-		this.StartCoroutine(AsyncLoad());
+		// 异步加载背景音乐
+		StartCoroutine(AsyncLoadMusic());
 	}
 	void OnDestroy()
 	{
@@ -36,6 +37,14 @@ public class Game2Scene : MonoBehaviour
 
 	void InitWindow()
 	{
+		// 同步加载背景图片
+		{
+			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
+			AssetOperationHandle handle = YooAssets.LoadAssetSync<Texture>("Texture/bg");
+			_cachedAssetOperationHandles.Add(handle);
+			rawImage.texture = handle.AssetObject as Texture;
+		}
+
 		// 异步加载主场景
 		{
 			var btn = CanvasRoot.transform.Find("load_scene").GetComponent<Button>();
@@ -69,27 +78,18 @@ public class Game2Scene : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 异步编程
+	/// 异步加载背景音乐
 	/// </summary>
-	IEnumerator AsyncLoad()
+	IEnumerator AsyncLoadMusic()
 	{
 		// 加载背景音乐
 		{
 			var audioSource = CanvasRoot.transform.Find("music").GetComponent<AudioSource>();
-			AssetOperationHandle handle = YooAssets.LoadAssetAsync<AudioClip>("Music/town.mp3");
+			AssetOperationHandle handle = YooAssets.LoadAssetAsync<AudioClip>("Music/town");
 			_cachedAssetOperationHandles.Add(handle);
 			yield return handle;
 			audioSource.clip = handle.AssetObject as AudioClip;
 			audioSource.Play();
-		}
-
-		// 加载背景图片
-		{
-			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
-			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Texture>("Texture/bg3.jpeg");
-			_cachedAssetOperationHandles.Add(handle);
-			yield return handle;
-			rawImage.texture = handle.AssetObject as Texture;
 		}
 	}
 }
