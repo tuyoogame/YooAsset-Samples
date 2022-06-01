@@ -38,12 +38,24 @@ public class Game2Scene : MonoBehaviour
 	void InitWindow()
 	{
 		// 同步加载背景图片
+#if UNITY_WEBGL
+		{
+			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
+			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Texture>("Texture/bg");
+			_cachedAssetOperationHandles.Add(handle);
+			handle.Completed += (AssetOperationHandle obj) =>
+			{
+				rawImage.texture = handle.AssetObject as Texture;
+			};
+		}
+#else
 		{
 			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
 			AssetOperationHandle handle = YooAssets.LoadAssetSync<Texture>("Texture/bg");
 			_cachedAssetOperationHandles.Add(handle);
 			rawImage.texture = handle.AssetObject as Texture;
 		}
+#endif
 
 		// 异步加载主场景
 		{

@@ -69,25 +69,49 @@ public class Game1Scene : MonoBehaviour
 		}
 
 		// 同步加载背景图片
+#if UNITY_WEBGL
+		{
+			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
+			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Texture>("Texture/bg");
+			_cachedAssetOperationHandles.Add(handle);
+			handle.Completed += (AssetOperationHandle obj) =>
+			{
+				rawImage.texture = handle.AssetObject as Texture;
+			};
+		}
+#else
 		{
 			var rawImage = CanvasRoot.transform.Find("background").GetComponent<RawImage>();
 			AssetOperationHandle handle = YooAssets.LoadAssetSync<Texture>("Texture/bg");
 			_cachedAssetOperationHandles.Add(handle);
 			rawImage.texture = handle.AssetObject as Texture;
 		}
+#endif
 
 		// 同步加载LOGO
+#if UNITY_WEBGL
+		{
+			var logoImage = CanvasRoot.transform.Find("title/logo").GetComponent<Image>();
+			AssetOperationHandle handle = YooAssets.LoadAssetAsync<Sprite>("Texture/logo.png");
+			_cachedAssetOperationHandles.Add(handle);
+			handle.Completed += (AssetOperationHandle obj) =>
+			{
+				logoImage.sprite = handle.AssetObject as Sprite;
+			};
+		}
+#else
 		{
 			var logoImage = CanvasRoot.transform.Find("title/logo").GetComponent<Image>();
 			AssetOperationHandle handle = YooAssets.LoadAssetSync<Sprite>("Texture/logo.png");
 			_cachedAssetOperationHandles.Add(handle);
 			logoImage.sprite = handle.AssetObject as Sprite;
 		}
+#endif
 
 		// 同步加载预制体
 		{
-			string[] entityAssetNames = 
-			{ 
+			string[] entityAssetNames =
+			{
 				"Level1/footman_Blue",
 				"Level2/footman_Green",
 				"Level3/footman_Red",
@@ -97,14 +121,26 @@ public class Game1Scene : MonoBehaviour
 			var btn = CanvasRoot.transform.Find("load_npc/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
+#if UNITY_WEBGL
+				var icon = CanvasRoot.transform.Find("load_npc/icon").GetComponent<Image>();
+				AssetOperationHandle handle = YooAssets.LoadAssetAsync<GameObject>($"Entity/{entityAssetNames[_npcIndex]}");
+				_cachedAssetOperationHandles.Add(handle);
+				handle.Completed += (AssetOperationHandle op) =>
+				{
+					GameObject go = handle.InstantiateSync(icon.transform);
+					go.transform.localPosition = new Vector3(0, -50, -100);
+					go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);
+					go.transform.localScale = Vector3.one * 50;
+				};
+#else
 				var icon = CanvasRoot.transform.Find("load_npc/icon").GetComponent<Image>();		
 				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>($"Entity/{entityAssetNames[_npcIndex]}");
 				_cachedAssetOperationHandles.Add(handle);
 				GameObject go = handle.InstantiateSync(icon.transform);
 				go.transform.localPosition = new Vector3(0, -50, -100);
 				go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);
-				go.transform.localScale = Vector3.one * 50;
-
+				go.transform.localScale = Vector3.one * 50;	
+#endif
 				_npcIndex++;
 				if (_npcIndex > 3)
 					_npcIndex = 0;
