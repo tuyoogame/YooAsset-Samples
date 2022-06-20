@@ -86,20 +86,13 @@ namespace YooAsset
 		public class HostPlayModeParameters : InitializeParameters
 		{
 			/// <summary>
+			/// 资源更新获取URL服务接口
+			/// </summary>
+			public IRemoteHostServices RemoteHostServices;
+			/// <summary>
 			/// 当缓存池被污染的时候清理缓存池
 			/// </summary>
 			public bool ClearCacheWhenDirty;
-
-			/// <summary>
-			/// 默认的资源服务器下载地址
-			/// </summary>
-			public string DefaultHostServer;
-
-			/// <summary>
-			/// 备用的资源服务器下载地址
-			/// </summary>
-			public string FallbackHostServer;
-
 			/// <summary>
 			/// 启用断点续传功能的文件大小
 			/// </summary>
@@ -215,9 +208,7 @@ namespace YooAsset
 				var hostPlayModeParameters = parameters as HostPlayModeParameters;
 				initializeOperation = _hostPlayModeImpl.InitializeAsync(
 					hostPlayModeParameters.LocationToLower,
-					hostPlayModeParameters.ClearCacheWhenDirty,
-					hostPlayModeParameters.DefaultHostServer,
-					hostPlayModeParameters.FallbackHostServer);
+					hostPlayModeParameters.ClearCacheWhenDirty, hostPlayModeParameters.RemoteHostServices);
 			}
 			else
 			{
@@ -233,6 +224,12 @@ namespace YooAsset
 			_initializeStatus = op.Status;
 			_initializeError = op.Error;
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static bool IsInitialized => _isInitialize;
+
 
 		/// <summary>
 		/// 向网络端请求静态资源版本
@@ -557,7 +554,7 @@ namespace YooAsset
 		/// </summary>
 		/// <typeparam name="TObject">资源类型</typeparam>
 		/// <param name="location">资源的定位地址</param>
-		public static AssetOperationHandle LoadAssetAsync<TObject>(string location)
+		public static AssetOperationHandle LoadAssetAsync<TObject>(string location) where TObject : UnityEngine.Object
 		{
 			DebugCheckInitialize();
 			AssetInfo assetInfo = ConvertLocationToAssetInfo(location, typeof(TObject));
@@ -925,15 +922,27 @@ namespace YooAsset
 		#endregion
 
 		#region 内部方法
+		internal static void InternalDestroy()
+		{
+			_isInitialize = false;
+			_initializeError = string.Empty;
+			_initializeStatus = EOperationStatus.None;
+
+			_bundleServices = null;
+			_locationServices = null;
+			_editorSimulateModeImpl = null;
+			_offlinePlayModeImpl = null;
+			_hostPlayModeImpl = null;
+
+			OperationSystem.DestroyAll();
+			DownloadSystem.DestroyAll();
+			AssetSystem.DestroyAll();
+			YooLogger.Log("YooAssets destroy all !");
+		}
 		internal static void InternalUpdate()
 		{
-			// 更新异步操作系统
 			OperationSystem.Update();
-
-			// 更新下载管理系统
 			DownloadSystem.Update();
-
-			// 更新资源系统
 			AssetSystem.Update();
 		}
 
