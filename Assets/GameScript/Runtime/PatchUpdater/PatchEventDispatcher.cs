@@ -33,10 +33,11 @@ public static class PatchEventDispatcher
 		PatchEventMessageDefine.PatchManifestUpdateFailed msg = new PatchEventMessageDefine.PatchManifestUpdateFailed();
 		EventManager.SendMessage(msg);
 	}
-	public static void SendWebFileDownloadFailedMsg(string name)
+	public static void SendWebFileDownloadFailedMsg(string fileName, string error)
 	{
 		PatchEventMessageDefine.WebFileDownloadFailed msg = new PatchEventMessageDefine.WebFileDownloadFailed();
-		msg.Name = name;
+		msg.FileName = fileName;
+		msg.Error = error;
 		EventManager.SendMessage(msg);
 	}
 }

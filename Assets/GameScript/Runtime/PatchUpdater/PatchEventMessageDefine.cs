@@ -48,6 +48,7 @@ public class PatchEventMessageDefine
 	/// </summary>
 	public class WebFileDownloadFailed : IEventMessage
 	{
-		public string Name;
+		public string FileName;
+		public string Error;
 	}
 }

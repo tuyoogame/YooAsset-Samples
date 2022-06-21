@@ -145,7 +145,7 @@ public class PatchWindow : MonoBehaviour
 			{
 				PatchUpdater.HandleOperation(EPatchOperation.TryDownloadWebFiles);
 			};
-			ShowMessageBox($"Failed to download file : {message.Name}", callback);
+			ShowMessageBox($"Failed to download file : {message.FileName}", callback);
 		}
 		else
 		{

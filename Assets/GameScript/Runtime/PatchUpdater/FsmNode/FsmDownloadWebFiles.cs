@@ -22,7 +22,7 @@ public class FsmDownloadWebFiles : IFsmNode
 		var downloader = PatchUpdater.Downloader;
 
 		// 注册下载回调
-		downloader.OnDownloadFileFailedCallback = PatchEventDispatcher.SendWebFileDownloadFailedMsg;
+		downloader.OnDownloadErrorCallback = PatchEventDispatcher.SendWebFileDownloadFailedMsg;
 		downloader.OnDownloadProgressCallback = PatchEventDispatcher.SendDownloadProgressUpdateMsg;
 		downloader.BeginDownload();
 		yield return downloader;
