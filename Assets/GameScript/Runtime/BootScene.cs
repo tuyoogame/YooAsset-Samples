@@ -62,6 +62,7 @@ public class BootScene : MonoBehaviour
 			createParameters.ClearCacheWhenDirty = false;
 			createParameters.DefaultHostServer = GetHostServerURL();
 			createParameters.FallbackHostServer = GetHostServerURL();
+			createParameters.VerifyLevel = EVerifyLevel.High;
 			yield return YooAssets.InitializeAsync(createParameters);
 		}
 
