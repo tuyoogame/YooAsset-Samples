@@ -124,7 +124,6 @@ public class Game1Scene : MonoBehaviour
 #if UNITY_WEBGL
 				var icon = CanvasRoot.transform.Find("load_npc/icon").GetComponent<Image>();
 				AssetOperationHandle handle = YooAssets.LoadAssetAsync<GameObject>($"Entity/{entityAssetNames[_npcIndex]}");
-				_cachedAssetOperationHandles.Add(handle);
 				handle.Completed += (AssetOperationHandle op) =>
 				{
 					GameObject go = handle.InstantiateSync(icon.transform);
@@ -135,7 +134,6 @@ public class Game1Scene : MonoBehaviour
 #else
 				var icon = CanvasRoot.transform.Find("load_npc/icon").GetComponent<Image>();		
 				AssetOperationHandle handle = YooAssets.LoadAssetSync<GameObject>($"Entity/{entityAssetNames[_npcIndex]}");
-				_cachedAssetOperationHandles.Add(handle);
 				GameObject go = handle.InstantiateSync(icon.transform);
 				go.transform.localPosition = new Vector3(0, -50, -100);
 				go.transform.localRotation = Quaternion.EulerAngles(0, 180, 0);

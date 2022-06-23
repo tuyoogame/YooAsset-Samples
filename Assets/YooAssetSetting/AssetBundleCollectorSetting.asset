@@ -102,7 +102,7 @@ MonoBehaviour:
       CollectorType: 1
       AddressRuleName: AddressByFileName
       PackRuleName: PackDirectory
-      FilterRuleName: CollectAll
+      FilterRuleName: CollectSprite
       AssetTags: 
     - CollectPath: Assets/GameArt/ShaderVariants
       CollectorType: 1

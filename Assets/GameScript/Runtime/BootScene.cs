@@ -41,6 +41,7 @@ public class BootScene : MonoBehaviour
 		{
 			var createParameters = new YooAssets.EditorSimulateModeParameters();
 			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");
+			createParameters.AutoReleaseGameObjectHandle = true;
 			//createParameters.SimulatePatchManifestPath = GetPatchManifestPath();
 			yield return YooAssets.InitializeAsync(createParameters);
 		}
@@ -50,6 +51,7 @@ public class BootScene : MonoBehaviour
 		{
 			var createParameters = new YooAssets.OfflinePlayModeParameters();
 			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");
+			createParameters.AutoReleaseGameObjectHandle = true;
 			yield return YooAssets.InitializeAsync(createParameters);
 		}
 
@@ -57,6 +59,7 @@ public class BootScene : MonoBehaviour
 		if (PlayMode == YooAssets.EPlayMode.HostPlayMode)
 		{
 			var createParameters = new YooAssets.HostPlayModeParameters();
+			createParameters.AutoReleaseGameObjectHandle = true;
 			createParameters.LocationServices = new DefaultLocationServices("Assets/GameRes");
 			createParameters.DecryptionServices = null;
 			createParameters.ClearCacheWhenDirty = false;
