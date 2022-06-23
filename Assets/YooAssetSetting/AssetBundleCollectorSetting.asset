@@ -19,6 +19,7 @@ MonoBehaviour:
   - GroupName: Level
     GroupDesc: "\u5173\u5361\u8D44\u6E90"
     AssetTags: level
+    ActiveRuleName: EnableGroup
     Collectors:
     - CollectPath: Assets/GameRes/Entity/Level1/footman_Blue.prefab
       CollectorType: 0
@@ -53,6 +54,7 @@ MonoBehaviour:
   - GroupName: Buildin
     GroupDesc: "\u5185\u7F6E\u8D44\u6E90"
     AssetTags: buildin
+    ActiveRuleName: EnableGroup
     Collectors:
     - CollectPath: Assets/GameRes/Scene
       CollectorType: 0
@@ -75,6 +77,7 @@ MonoBehaviour:
   - GroupName: Other
     GroupDesc: "\u5176\u5B83\u8D44\u6E90"
     AssetTags: other
+    ActiveRuleName: EnableGroup
     Collectors:
     - CollectPath: Assets/GameRes/Music
       CollectorType: 0
@@ -97,6 +100,7 @@ MonoBehaviour:
   - GroupName: Art
     GroupDesc: "\u7F8E\u672F\u8D44\u6E90"
     AssetTags: 
+    ActiveRuleName: EnableGroup
     Collectors:
     - CollectPath: Assets/GameArt/UISprite/UIIcons
       CollectorType: 1
