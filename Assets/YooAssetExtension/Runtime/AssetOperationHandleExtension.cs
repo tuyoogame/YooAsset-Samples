@@ -5,6 +5,7 @@ using YooAsset;
 
 public static class AssetOperationHandleExtension
 {
+    /*
     /// <summary>
     /// 获取资源对象
     /// </summary>
@@ -20,6 +21,7 @@ public static class AssetOperationHandleExtension
         asset = thisHandle.AssetObject as TAsset;
         return thisHandle;
     }
+    */
 
     /// <summary>
     /// 等待异步执行完毕

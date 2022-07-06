@@ -193,7 +193,7 @@ public class Game1Scene : MonoBehaviour
 	private void OnUnityAtlas_Completed(AssetOperationHandle handle)
 	{
 		var icon = CanvasRoot.transform.Find("load_unity_atlas/icon").GetComponent<Image>();
-		icon.sprite = handle.GetAssetObject<Sprite>();
+		icon.sprite = handle.AssetObject as Sprite;
 	}
 	private void OnTpAtlasAsset_Completed(SubAssetsOperationHandle handle)
 	{

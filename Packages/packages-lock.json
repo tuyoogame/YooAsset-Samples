@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.tuyoogame.yooasset": {
+      "version": "1.1.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.cn"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
