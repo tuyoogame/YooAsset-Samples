@@ -74,27 +74,39 @@ MonoBehaviour:
       PackRuleName: PackDirectory
       FilterRuleName: CollectAll
       AssetTags: 
+    - CollectPath: Assets/GameRes/Music
+      CollectorType: 0
+      AddressRuleName: AddressByFileName
+      PackRuleName: PackDirectory
+      FilterRuleName: CollectAll
+      AssetTags: 
   - GroupName: Other
     GroupDesc: "\u5176\u5B83\u8D44\u6E90"
     AssetTags: other
     ActiveRuleName: EnableGroup
     Collectors:
-    - CollectPath: Assets/GameRes/Music
-      CollectorType: 0
-      AddressRuleName: AddressByFileName
-      PackRuleName: PackCollector
-      FilterRuleName: CollectAll
-      AssetTags: 
     - CollectPath: Assets/GameRes/Texture
       CollectorType: 0
       AddressRuleName: AddressByFileName
       PackRuleName: PackCollector
       FilterRuleName: CollectAll
       AssetTags: 
-    - CollectPath: Assets/GameRes/UIAtlas
+    - CollectPath: Assets/GameRes/TpAtlas
       CollectorType: 0
       AddressRuleName: AddressByFileName
-      PackRuleName: PackTopDirectory
+      PackRuleName: PackDirectory
+      FilterRuleName: CollectAll
+      AssetTags: 
+    - CollectPath: Assets/GameRes/UIPanel
+      CollectorType: 0
+      AddressRuleName: AddressByFileName
+      PackRuleName: PackDirectory
+      FilterRuleName: CollectAll
+      AssetTags: 
+    - CollectPath: Assets/GameRes/UISprite
+      CollectorType: 0
+      AddressRuleName: AddressByFileName
+      PackRuleName: PackDirectory
       FilterRuleName: CollectAll
       AssetTags: 
   - GroupName: Art
@@ -102,12 +114,6 @@ MonoBehaviour:
     AssetTags: 
     ActiveRuleName: EnableGroup
     Collectors:
-    - CollectPath: Assets/GameArt/UISprite/UIIcons
-      CollectorType: 1
-      AddressRuleName: AddressByFileName
-      PackRuleName: PackDirectory
-      FilterRuleName: CollectSprite
-      AssetTags: 
     - CollectPath: Assets/GameArt/ShaderVariants
       CollectorType: 1
       AddressRuleName: AddressByFileName

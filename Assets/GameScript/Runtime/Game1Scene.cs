@@ -152,7 +152,7 @@ public class Game1Scene : MonoBehaviour
 			var btn = CanvasRoot.transform.Find("load_unity_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				AssetOperationHandle handle = YooAssets.LoadAssetAsync<SpriteAtlas>("UIAtlas/UnityPacker/unityAtlas");
+				AssetOperationHandle handle = YooAssets.LoadAssetAsync<Sprite>("UISprite/Icon_Leafs_128");
 				_cachedAssetOperationHandles.Add(handle);
 				handle.Completed += OnUnityAtlas_Completed;
 			});
@@ -163,7 +163,7 @@ public class Game1Scene : MonoBehaviour
 			var btn = CanvasRoot.transform.Find("load_tp_atlas/btn").GetComponent<Button>();
 			btn.onClick.AddListener(() =>
 			{
-				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("UIAtlas/TexturePacker/tpAtlas");
+				SubAssetsOperationHandle handle = YooAssets.LoadSubAssetsAsync<Sprite>("TpAtlas/tpAtlas");
 				_cachedSubAssetsOperationHandles.Add(handle);
 				handle.Completed += OnTpAtlasAsset_Completed;
 			});
@@ -193,8 +193,7 @@ public class Game1Scene : MonoBehaviour
 	private void OnUnityAtlas_Completed(AssetOperationHandle handle)
 	{
 		var icon = CanvasRoot.transform.Find("load_unity_atlas/icon").GetComponent<Image>();
-		SpriteAtlas atlas = handle.AssetObject as SpriteAtlas;
-		icon.sprite = atlas.GetSprite("Icon_Arrows_128");
+		icon.sprite = handle.GetAssetObject<Sprite>();
 	}
 	private void OnTpAtlasAsset_Completed(SubAssetsOperationHandle handle)
 	{

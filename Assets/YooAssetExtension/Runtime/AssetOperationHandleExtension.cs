@@ -10,7 +10,7 @@ public static class AssetOperationHandleExtension
     /// </summary>
     /// <typeparam name="TAsset"></typeparam>
     /// <param name="asset"></param>
-    public static AssetOperationHandle GetAssetObjet<TAsset>(this AssetOperationHandle thisHandle, out TAsset asset) where TAsset : UnityEngine.Object
+    public static AssetOperationHandle GetAssetObject<TAsset>(this AssetOperationHandle thisHandle, out TAsset asset) where TAsset : UnityEngine.Object
     {
         if (thisHandle.Status != EOperationStatus.Succeed)
         {
