@@ -61,6 +61,7 @@ crashlytics-build.properties
 *.vsconfig
 Assets/StreamingAssets/
 Assets/StreamingAssets.meta
+Assets/YooAsset/
+Assets/YooAsset.meta
 Bundles
 Sandbox
-
