@@ -115,7 +115,7 @@ namespace YooAsset.Editor
 			// 拷贝文件列表
 			foreach (var patchBundle2 in patchManifest2.BundleList)
 			{
-				if (patchManifest1.Bundles.TryGetValue(patchBundle2.BundleName, out PatchBundle patchBundle1))
+				if (patchManifest1.TryGetPatchBundle(patchBundle2.BundleName, out PatchBundle patchBundle1))
 				{
 					if (patchBundle2.Hash != patchBundle1.Hash)
 					{
