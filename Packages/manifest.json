@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.tuyoogame.yooasset": "1.1.0",
+    "com.tuyoogame.yooasset": "1.1.1",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ide.visualstudio": "2.0.15",
     "com.unity.scriptablebuildpipeline": "1.19.6",
