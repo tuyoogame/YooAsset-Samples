@@ -100,7 +100,7 @@ MonoBehaviour:
     - CollectPath: Assets/GameRes/UIPanel
       CollectorType: 0
       AddressRuleName: AddressByFileName
-      PackRuleName: PackDirectory
+      PackRuleName: PackSeparately
       FilterRuleName: CollectAll
       AssetTags: 
     - CollectPath: Assets/GameRes/UISprite

@@ -7,11 +7,8 @@
             "ShaderName": "Hidden/Internal-ScreenSpaceShadows",
             "PassType": 0,
             "Keywords": [
-                "BILLBOARD_FACE_CAMERA_POS",
-                "SHADOWS_DEPTH",
                 "SHADOWS_SINGLE_CASCADE",
-                "SHADOWS_SPLIT_SPHERES",
-                "UNITY_HDR_ON"
+                "SHADOWS_SPLIT_SPHERES"
             ]
         },
         {
@@ -117,51 +114,12 @@
             ]
         },
         {
-            "AssetPath": "Resources/unity_builtin_extra",
-            "ShaderName": "Mobile/Diffuse",
-            "PassType": 4,
+            "AssetPath": "Assets/GameRes/Shaders/MyUnlitShader.shader",
+            "ShaderName": "Unlit/MyUnlitShader",
+            "PassType": 0,
             "Keywords": [
                 "BILLBOARD_FACE_CAMERA_POS",
-                "DIRECTIONAL",
-                "LIGHTPROBE_SH",
-                "SHADOWS_SCREEN",
-                "SHADOWS_SOFT",
-                "SHADOWS_SPLIT_SPHERES",
-                "UNITY_HDR_ON",
-                "_EMISSION",
-                "_METALLICGLOSSMAP",
-                "_NORMALMAP"
-            ]
-        },
-        {
-            "AssetPath": "Resources/unity_builtin_extra",
-            "ShaderName": "Mobile/Diffuse",
-            "PassType": 8,
-            "Keywords": [
-                "SHADOWS_DEPTH"
-            ]
-        },
-        {
-            "AssetPath": "Resources/unity_builtin_extra",
-            "ShaderName": "Mobile/Diffuse",
-            "PassType": 8,
-            "Keywords": [
-                "_EMISSION",
-                "_METALLICGLOSSMAP",
-                "_NORMALMAP"
-            ]
-        },
-        {
-            "AssetPath": "Resources/unity_builtin_extra",
-            "ShaderName": "Mobile/Diffuse",
-            "PassType": 8,
-            "Keywords": [
-                "BILLBOARD_FACE_CAMERA_POS",
-                "SHADOWS_DEPTH",
-                "SHADOWS_SPLIT_SPHERES",
-                "_EMISSION",
-                "_METALLICGLOSSMAP",
-                "_NORMALMAP"
+                "UNITY_HDR_ON"
             ]
         },
         {
@@ -170,10 +128,25 @@
             "PassType": 1,
             "Keywords": [
                 "BILLBOARD_FACE_CAMERA_POS",
-                "SHADOWS_SCREEN",
-                "SHADOWS_SOFT",
-                "SHADOWS_SPLIT_SPHERES",
                 "UNITY_HDR_ON",
+                "_EMISSION",
+                "_METALLICGLOSSMAP",
+                "_NORMALMAP"
+            ]
+        },
+        {
+            "AssetPath": "Assets/GameArt/Shaders/StandardMobile.shader",
+            "ShaderName": "Mobile/Standard",
+            "PassType": 8,
+            "Keywords": [
+                "SHADOWS_DEPTH"
+            ]
+        },
+        {
+            "AssetPath": "Assets/GameArt/Shaders/StandardMobile.shader",
+            "ShaderName": "Mobile/Standard",
+            "PassType": 8,
+            "Keywords": [
                 "_EMISSION",
                 "_METALLICGLOSSMAP",
                 "_NORMALMAP"
